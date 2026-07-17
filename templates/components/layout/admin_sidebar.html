@@ -1,0 +1,55 @@
+<!-- Admin Sidebar Component -->
+<nav id="sidebar" class="sidebar shadow-sm">
+    <div class="sidebar-header d-flex justify-content-between align-items-center">
+        <a href="/admin/dashboard" class="sidebar-brand text-decoration-none">
+            <i class="bi bi-shield-lock-fill me-2 text-danger"></i>NGO Admin
+        </a>
+        <button id="sidebar-close" class="btn btn-sm d-lg-none p-0 text-muted border-0">
+            <i class="bi bi-x-lg fs-4"></i>
+        </button>
+    </div>
+    
+    <div class="sidebar-nav">
+        <!-- Main Navigation -->
+        <div class="small text-muted fw-bold mb-2 px-3 text-uppercase">Overview</div>
+        
+        <div class="nav-item">
+            <a href="/admin/dashboard" class="nav-link {% if active_page == 'admin_dashboard' %}active{% endif %}">
+                <i class="bi bi-grid-1x2"></i> Dashboard
+            </a>
+        </div>
+        
+        <hr class="my-3 opacity-25">
+        
+        <!-- Management Section -->
+        <div class="small text-muted fw-bold mb-2 px-3 text-uppercase">Management</div>
+        
+        <div class="nav-item">
+            <a href="/admin/requests" class="nav-link {% if active_page == 'admin_requests' %}active{% endif %}">
+                <i class="bi bi-inbox"></i> Pending Requests
+                <span id="sidebarRequestsBadge" class="badge bg-warning ms-auto rounded-pill d-none">0</span>
+            </a>
+        </div>
+        
+        <div class="nav-item">
+            <a href="/admin/events" class="nav-link {% if active_page == 'admin_events' %}active{% endif %}">
+                <i class="bi bi-calendar2-event"></i> Events
+            </a>
+        </div>
+        
+        <div class="nav-item">
+            <a href="/admin/volunteers" class="nav-link {% if active_page == 'admin_users' %}active{% endif %}">
+                <i class="bi bi-people"></i> Volunteers
+            </a>
+        </div>
+        
+        <hr class="my-3 opacity-25">
+        
+        <!-- Logout -->
+        <div class="nav-item mt-3">
+            <a href="/" class="nav-link text-danger" onclick="localStorage.removeItem('admin_access_token');">
+                <i class="bi bi-box-arrow-left"></i> Admin Logout
+            </a>
+        </div>
+    </div>
+</nav>

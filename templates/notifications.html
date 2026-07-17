@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Notifications — NGO Volunteer System{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/notifications.css') }}">
+{% endblock %}
+
+{% block page_title %}Notifications{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-2">
+    
+    <div class="notifications-container">
+        
+        <!-- Header -->
+        <div class="notifications-header">
+            <div>
+                <h2 class="fw-bold mb-1">Your Notifications</h2>
+                <p class="text-muted mb-0">Stay updated on your requests and upcoming events.</p>
+            </div>
+            
+            <div class="d-flex align-items-center gap-3">
+                <select id="notificationFilter" class="form-select form-select-sm border-0 shadow-sm rounded-pill px-3 py-2 bg-secondary text-primary" style="width: auto;">
+                    <option value="all">All Notifications</option>
+                    <option value="unread">Unread Only</option>
+                </select>
+                <button id="markAllReadBtn" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold">
+                    <i class="bi bi-check2-all me-1"></i> Mark All as Read
+                </button>
+            </div>
+        </div>
+
+        <!-- Notifications List -->
+        <div id="notificationsList">
+            <!-- JS populates this container -->
+        </div>
+        
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+{% endblock %}

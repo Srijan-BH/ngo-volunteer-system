@@ -1,0 +1,257 @@
+/*
+ * Events Page Styles
+ */
+
+/* ========================================================================
+   Filters & Search Bar
+   ======================================================================== */
+.events-filter-bar {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 250px;
+    max-width: 400px;
+}
+.search-box .form-control {
+    padding-left: 2.5rem;
+    border-radius: 2rem;
+}
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.filter-actions select {
+    border-radius: 2rem;
+    min-width: 150px;
+}
+
+/* ========================================================================
+   Event Cards Grid
+   ======================================================================== */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.event-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Banner */
+.event-banner {
+    position: relative;
+    height: 180px;
+    background-color: var(--bg-tertiary);
+    overflow: hidden;
+}
+.event-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.event-card:hover .event-banner img {
+    transform: scale(1.05);
+}
+
+/* Badges overlay */
+.event-badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 2;
+}
+.event-category {
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 0.35rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.event-status {
+    padding: 0.35rem 0.75rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Card Body */
+.event-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.event-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+.event-desc {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Event Info (Icon + Text lists) */
+.event-info {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.event-info li {
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+.event-info i {
+    color: var(--primary);
+    margin-top: 0.15rem;
+}
+
+/* Slots Progress */
+.slots-container {
+    margin-bottom: 1.25rem;
+}
+.slots-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+.slots-progress {
+    height: 6px;
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.slots-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--info));
+    border-radius: 3px;
+}
+.slots-bar.full {
+    background: var(--danger);
+}
+
+/* Countdown Timer */
+.countdown-timer {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    background: var(--bg-tertiary);
+    padding: 0.75rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+    border: 1px dashed var(--border-color);
+}
+.countdown-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 40px;
+}
+.countdown-val {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary);
+    line-height: 1;
+}
+.countdown-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 0.2rem;
+}
+
+/* Footer / Actions */
+.event-footer {
+    margin-top: auto;
+}
+
+/* ========================================================================
+   Loading Skeletons
+   ======================================================================== */
+.event-card.skeleton-card .event-banner {
+    background: var(--bg-tertiary);
+}
+.event-card.skeleton-card .event-title {
+    width: 80%;
+    height: 1.5rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+.event-card.skeleton-card .event-desc {
+    width: 100%;
+    height: 3rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+.event-card.skeleton-card .event-info li {
+    width: 60%;
+    height: 1rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+.event-card.skeleton-card .btn {
+    width: 100%;
+    height: 2.5rem;
+    background: var(--bg-tertiary);
+    border-color: transparent;
+}

@@ -1,0 +1,52 @@
+{% macro stat(title, value, icon, color='primary', trend=None, trend_text=None) %}
+<div class="card stat-card border-0 h-100">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <p class="text-muted small fw-semibold text-uppercase mb-1">{{ title }}</p>
+                <h3 class="mb-0 fw-bold">{{ value }}</h3>
+                
+                {% if trend %}
+                    <div class="mt-2 small">
+                        {% if trend == 'up' %}
+                            <span class="text-success fw-bold"><i class="bi bi-arrow-up-short"></i> {{ trend_text }}</span>
+                        {% elif trend == 'down' %}
+                            <span class="text-danger fw-bold"><i class="bi bi-arrow-down-short"></i> {{ trend_text }}</span>
+                        {% else %}
+                            <span class="text-muted">{{ trend_text }}</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="rounded-circle bg-opacity-10 bg-{{ color }} p-3 text-{{ color }}">
+                <i class="bi {{ icon }} fs-4"></i>
+            </div>
+        </div>
+        <i class="bi {{ icon }} stat-icon"></i>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro default(title=None, subtitle=None, class='') %}
+<div class="card {{ class }}">
+    {% if title or subtitle %}
+    <div class="card-header border-0 bg-transparent pt-4 pb-0">
+        {% if title %}<h5 class="card-title mb-1 fw-bold">{{ title }}</h5>{% endif %}
+        {% if subtitle %}<p class="text-muted small mb-0">{{ subtitle }}</p>{% endif %}
+    </div>
+    {% endif %}
+    
+    <div class="card-body">
+        {{ caller() }}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro glass(title=None, class='') %}
+<div class="glass-panel {{ class }} p-4">
+    {% if title %}
+        <h4 class="fw-bold mb-4">{{ title }}</h4>
+    {% endif %}
+    {{ caller() }}
+</div>
+{% endmacro %}

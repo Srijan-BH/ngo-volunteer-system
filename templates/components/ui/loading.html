@@ -1,0 +1,30 @@
+{% macro text(lines=1, class='') %}
+<div class="{{ class }}">
+    {% for i in range(lines) %}
+        <div class="skeleton skeleton-text {% if loop.last and lines > 1 %}short{% endif %}"></div>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro title(class='') %}
+<div class="skeleton skeleton-title {{ class }}"></div>
+{% endmacro %}
+
+{% macro avatar(class='') %}
+<div class="skeleton skeleton-avatar {{ class }}"></div>
+{% endmacro %}
+
+{% macro card(class='') %}
+<div class="card {{ class }}">
+    <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+            {{ avatar('me-3') }}
+            <div class="w-100">
+                {{ title('mb-1 w-50') }}
+                {{ text(1, 'w-25') }}
+            </div>
+        </div>
+        {{ text(3) }}
+    </div>
+</div>
+{% endmacro %}

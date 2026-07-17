@@ -1,0 +1,61 @@
+<!-- Top Navbar Component -->
+<nav class="top-navbar w-100">
+    <div class="d-flex align-items-center">
+        <button id="sidebar-toggle" class="btn btn-link text-muted p-0 me-3 d-lg-none border-0">
+            <i class="bi bi-list fs-4"></i>
+        </button>
+        
+        <h4 class="mb-0 fw-semibold d-none d-md-block">
+            {% block page_title %}Overview{% endblock %}
+        </h4>
+    </div>
+    
+    <div class="d-flex align-items-center gap-3">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+            <i class="bi bi-moon"></i>
+        </button>
+        
+        <!-- Search -->
+        <div class="position-relative d-none d-md-block">
+            <input type="text" class="form-control form-control-sm rounded-pill ps-3 pe-4" placeholder="Search events..." style="width: 200px;">
+            <i class="bi bi-search position-absolute text-muted" style="right: 12px; top: 50%; transform: translateY(-50%); font-size: 0.8rem;"></i>
+        </div>
+        
+        <!-- Notifications Dropdown -->
+        <div class="dropdown">
+            <a href="#" class="text-decoration-none text-muted position-relative d-flex align-items-center" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.25rem;">
+                <i class="bi bi-bell fs-5"></i>
+                <span id="notifBadge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" style="font-size: 0.6rem; padding: 0.2em 0.4em;">
+                    0
+                </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 p-0" aria-labelledby="notifDropdown" style="width: 300px; max-height: 400px;">
+                <div class="d-flex justify-content-between align-items-center px-3 py-2 border-bottom bg-light rounded-top">
+                    <span class="fw-bold fs-6">Notifications</span>
+                    <a href="#" id="markAllReadBtn" class="text-primary text-decoration-none small">Mark all read</a>
+                </div>
+                <div id="notifList" class="overflow-auto" style="max-height: 320px;">
+                    <div class="p-3 text-center text-muted small">Loading...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- User Dropdown -->
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <img id="navAvatar" src="" alt="User" width="36" height="36" class="rounded-circle bg-secondary border border-2 border-white shadow-sm d-none">
+                <div class="ms-2 d-none d-sm-block text-start" style="line-height: 1.2;">
+                    <div id="navUserName" class="small fw-bold text-primary" style="font-size: 0.85rem;">...</div>
+                    <div id="navUserRole" class="text-muted text-capitalize" style="font-size: 0.75rem;">...</div>
+                </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="/profile"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                <li><a class="dropdown-item" href="/settings"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="/" onclick="localStorage.removeItem('access_token'); localStorage.removeItem('refresh_token'); localStorage.removeItem('admin_access_token');"><i class="bi bi-box-arrow-right me-2"></i> Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

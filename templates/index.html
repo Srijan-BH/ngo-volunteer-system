@@ -1,0 +1,293 @@
+{% extends "public_base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero" class="hero-section">
+    <div class="hero-bg-shapes">
+        <div class="shape-blob shape-1"></div>
+        <div class="shape-blob shape-2"></div>
+    </div>
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0 animate-fade-in-up">
+                <span class="badge bg-primary bg-opacity-10 text-primary mb-3 py-2 px-3 rounded-pill fw-semibold">
+                    <i class="bi bi-star-fill me-1 text-warning"></i> Join our growing community
+                </span>
+                <h1 class="display-4 fw-bold mb-4 lh-sm">
+                    Make a Difference.<br>
+                    <span class="text-gradient">Volunteer Today.</span>
+                </h1>
+                <p class="lead text-secondary mb-5">
+                    Connect with meaningful causes, track your impact, and be part of a community dedicated to creating positive change in the world.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="/register" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm fw-semibold">Join Now</a>
+                    <a href="#mission" class="btn btn-outline-secondary btn-lg rounded-pill px-5 fw-semibold">Learn More</a>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block animate-fade-in-up" style="animation-delay: 0.2s;">
+                <div class="position-relative">
+                    <img src="{{ url_for('static', filename='images/hero_volunteers.png') }}" alt="Volunteers working together" class="img-fluid rounded-4 shadow-lg border border-5 border-white">
+                    
+                    <!-- Floating Glass Card -->
+                    <div class="position-absolute bottom-0 start-0 translate-middle-x mb-5 ms-4 glass-panel p-3 rounded-4 shadow-lg d-flex align-items-center" style="z-index: 2;">
+                        <div class="bg-primary rounded-circle p-2 text-white me-3">
+                            <i class="bi bi-shield-check fs-4"></i>
+                        </div>
+                        <div>
+                            <p class="mb-0 fw-bold">Verified Platform</p>
+                            <p class="mb-0 small text-muted">Trusted NGOs & Causes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section id="mission" class="section-padding bg-secondary bg-opacity-10">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <h6 class="text-primary fw-bold text-uppercase tracking-wide mb-2">Our Mission</h6>
+                <h2 class="fw-bold mb-4">Empowering Communities Through Service</h2>
+                <p class="text-secondary lead">We bridge the gap between passionate individuals and organizations in need, fostering a culture of giving back and sustainable development.</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="card-body">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
+                            <i class="bi bi-globe-americas fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Global Impact</h4>
+                        <p class="text-muted mb-0">Reaching communities worldwide with scalable volunteer programs and resources.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="card-body">
+                        <div class="bg-success bg-opacity-10 text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
+                            <i class="bi bi-people-fill fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Community First</h4>
+                        <p class="text-muted mb-0">Prioritizing local needs and building strong, resilient community networks.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm text-center p-4">
+                    <div class="card-body">
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
+                            <i class="bi bi-lightning-charge-fill fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Rapid Action</h4>
+                        <p class="text-muted mb-0">Mobilizing volunteers quickly in times of crisis or urgent community need.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Values Section -->
+<section id="core-values" class="section-padding">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item text-center">
+                    <div class="text-primary mb-2"><i class="bi bi-wallet2 fs-1"></i></div>
+                    <div class="fw-bold fs-4 mb-1">100% Free</div>
+                    <div class="text-muted fw-medium text-uppercase small">For All Volunteers</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item text-center">
+                    <div class="text-success mb-2"><i class="bi bi-geo-alt fs-1"></i></div>
+                    <div class="fw-bold fs-4 mb-1">Local Focus</div>
+                    <div class="text-muted fw-medium text-uppercase small">Community Driven</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item text-center">
+                    <div class="text-warning mb-2"><i class="bi bi-shield-check fs-1"></i></div>
+                    <div class="fw-bold fs-4 mb-1">Verified</div>
+                    <div class="text-muted fw-medium text-uppercase small">Trusted NGOs Only</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item text-center">
+                    <div class="text-info mb-2"><i class="bi bi-stopwatch fs-1"></i></div>
+                    <div class="fw-bold fs-4 mb-1">Real-Time</div>
+                    <div class="text-muted fw-medium text-uppercase small">Impact Tracking</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works Section -->
+<section id="how-it-works" class="section-padding bg-secondary bg-opacity-10">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="text-primary fw-bold text-uppercase tracking-wide mb-2">Simple Process</h6>
+            <h2 class="fw-bold mb-0">How It Works</h2>
+        </div>
+        
+        <div class="row g-4 position-relative">
+            <!-- Connecting Line for Desktop -->
+            <div class="d-none d-lg-block position-absolute top-50 start-50 translate-middle w-75 border-top border-2 border-primary border-opacity-25" style="z-index: 0;"></div>
+            
+            <!-- Step 1 -->
+            <div class="col-lg-4 text-center position-relative" style="z-index: 1;">
+                <div class="bg-body rounded-circle d-inline-flex align-items-center justify-content-center shadow mb-4 border border-4 border-white" style="width: 100px; height: 100px;">
+                    <i class="bi bi-person-vcard text-primary fs-1"></i>
+                </div>
+                <h4 class="fw-bold mb-3">1. Create an Account</h4>
+                <p class="text-secondary px-3">Sign up in seconds. Tell us about your skills, interests, and availability so we can find the perfect matches for you.</p>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="col-lg-4 text-center position-relative" style="z-index: 1;">
+                <div class="bg-body rounded-circle d-inline-flex align-items-center justify-content-center shadow mb-4 border border-4 border-white" style="width: 100px; height: 100px;">
+                    <i class="bi bi-search text-primary fs-1"></i>
+                </div>
+                <h4 class="fw-bold mb-3">2. Discover Events</h4>
+                <p class="text-secondary px-3">Use our interactive map to find verified NGO events and causes happening right in your local neighborhood.</p>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="col-lg-4 text-center position-relative" style="z-index: 1;">
+                <div class="bg-body rounded-circle d-inline-flex align-items-center justify-content-center shadow mb-4 border border-4 border-white" style="width: 100px; height: 100px;">
+                    <i class="bi bi-stars text-primary fs-1"></i>
+                </div>
+                <h4 class="fw-bold mb-3">3. Make an Impact</h4>
+                <p class="text-secondary px-3">Join the event, collaborate with your community, and automatically track your volunteering hours on your dashboard.</p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="/register" class="btn btn-primary rounded-pill px-5 btn-lg shadow-sm">Get Started Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Services / Features -->
+<section id="services" class="section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h6 class="text-primary fw-bold text-uppercase tracking-wide mb-2">NGO Services</h6>
+                <h2 class="fw-bold mb-4">Everything you need to manage volunteers</h2>
+                <p class="text-secondary mb-4">Our platform provides end-to-end solutions for NGOs to recruit, manage, and engage with their volunteer base efficiently.</p>
+                
+                <ul class="list-unstyled mb-0">
+                    <li class="d-flex mb-4">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded p-3 me-3 h-100">
+                            <i class="bi bi-person-lines-fill fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Smart Profile Matching</h5>
+                            <p class="text-muted mb-0">Automatically match volunteers to events based on their skills and interests.</p>
+                        </div>
+                    </li>
+                    <li class="d-flex mb-4">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded p-3 me-3 h-100">
+                            <i class="bi bi-calendar-check fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Event Scheduling</h5>
+                            <p class="text-muted mb-0">Create, manage, and track attendance for recurring and one-off events.</p>
+                        </div>
+                    </li>
+                    <li class="d-flex">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded p-3 me-3 h-100">
+                            <i class="bi bi-graph-up-arrow fs-4"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Impact Analytics</h5>
+                            <p class="text-muted mb-0">Generate detailed reports on volunteer hours and community impact.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-5 offset-lg-1">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop" alt="Team meeting" class="img-fluid rounded-4 shadow-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Meet the Developer Section -->
+<section id="developer" class="section-padding bg-secondary bg-opacity-10">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h6 class="text-primary fw-bold text-uppercase tracking-wide mb-2">Developed By</h6>
+                <h2 class="fw-bold mb-5">Meet the Creator</h2>
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden mx-auto glass-panel" style="max-width: 450px;">
+                    <div class="card-body p-5">
+                        <img src="{{ url_for('static', filename='images/developer.jpg') }}" alt="Srijan BH" class="rounded-circle mb-4 border border-4 border-white shadow" style="width: 150px; height: 150px; object-fit: cover;" onerror="this.src='https://ui-avatars.com/api/?name=Srijan+BH&background=4f46e5&color=fff&size=150'">
+                        <h3 class="fw-bold mb-1">Srijan BH</h3>
+                        <p class="text-primary fw-semibold mb-3">Lead Developer & Creator</p>
+                        <p class="text-muted mb-4">Currently pursuing MCA. Passionate about using modern technology to drive social change, empower communities, and build elegant software solutions.</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="https://github.com/Srijan-BH" target="_blank" class="btn btn-light rounded-circle shadow-sm" title="GitHub"><i class="bi bi-github fs-5"></i></a>
+                            <a href="https://www.linkedin.com/in/bh-srijan-naik?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="btn btn-light rounded-circle shadow-sm" title="LinkedIn"><i class="bi bi-linkedin fs-5 text-primary"></i></a>
+                            <a href="https://www.instagram.com/srijan_naik?igsh=Z3oxMjh6dGpyMmlq" target="_blank" class="btn btn-light rounded-circle shadow-sm" title="Instagram"><i class="bi bi-instagram fs-5 text-danger"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="text-primary fw-bold text-uppercase tracking-wide mb-2">Gallery</h6>
+            <h2 class="fw-bold">Moments of Impact</h2>
+        </div>
+        
+        <div class="row g-3">
+            <div class="col-md-4 col-6">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?q=80&w=400&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover" alt="Gallery Image">
+                    <div class="gallery-overlay"><i class="bi bi-search"></i></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-6">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=400&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover" alt="Gallery Image">
+                    <div class="gallery-overlay"><i class="bi bi-search"></i></div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=400&auto=format&fit=crop" class="img-fluid w-100 h-100 object-fit-cover" alt="Gallery Image">
+                    <div class="gallery-overlay"><i class="bi bi-search"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section text-center">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Ready to start your journey?</h2>
+        <p class="lead mb-5 opacity-75 mx-auto" style="max-width: 600px;">Join thousands of volunteers making a difference every day. Sign up now and find your perfect volunteering opportunity.</p>
+        <a href="/register" class="btn btn-light btn-lg rounded-pill px-5 shadow-sm me-3">Register Now</a>
+        <a href="/contact" class="btn btn-outline-light btn-lg rounded-pill px-5">Contact Us</a>
+    </div>
+</section>
+
+{% endblock %}

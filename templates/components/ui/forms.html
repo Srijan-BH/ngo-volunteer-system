@@ -1,0 +1,36 @@
+{% macro floating_input(name, label, type='text', value='', required=false, disabled=false, id=None) %}
+{% set input_id = id if id else 'input_' ~ name %}
+<div class="form-floating mb-3">
+    <input type="{{ type }}" class="form-control" id="{{ input_id }}" name="{{ name }}" placeholder="{{ label }}" value="{{ value }}" {% if required %}required{% endif %} {% if disabled %}disabled{% endif %}>
+    <label for="{{ input_id }}">{{ label }}{% if required %} <span class="text-danger">*</span>{% endif %}</label>
+</div>
+{% endmacro %}
+
+{% macro floating_textarea(name, label, value='', rows=3, required=false, id=None) %}
+{% set input_id = id if id else 'textarea_' ~ name %}
+<div class="form-floating mb-3">
+    <textarea class="form-control" id="{{ input_id }}" name="{{ name }}" placeholder="{{ label }}" style="height: {{ rows * 25 }}px" {% if required %}required{% endif %}>{{ value }}</textarea>
+    <label for="{{ input_id }}">{{ label }}{% if required %} <span class="text-danger">*</span>{% endif %}</label>
+</div>
+{% endmacro %}
+
+{% macro floating_select(name, label, options, selected='', required=false, id=None) %}
+{% set input_id = id if id else 'select_' ~ name %}
+<div class="form-floating mb-3">
+    <select class="form-select" id="{{ input_id }}" name="{{ name }}" aria-label="{{ label }}" {% if required %}required{% endif %}>
+        <option value="" disabled {% if not selected %}selected{% endif %}>Select {{ label }}</option>
+        {% for value, text in options %}
+            <option value="{{ value }}" {% if selected == value %}selected{% endif %}>{{ text }}</option>
+        {% endfor %}
+    </select>
+    <label for="{{ input_id }}">{{ label }}{% if required %} <span class="text-danger">*</span>{% endif %}</label>
+</div>
+{% endmacro %}
+
+{% macro switch(name, label, checked=false, id=None) %}
+{% set input_id = id if id else 'switch_' ~ name %}
+<div class="form-check form-switch mb-3">
+    <input class="form-check-input" type="checkbox" role="switch" id="{{ input_id }}" name="{{ name }}" {% if checked %}checked{% endif %}>
+    <label class="form-check-label" for="{{ input_id }}">{{ label }}</label>
+</div>
+{% endmacro %}

@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+
+{% block title %}Community Chat — NGO Volunteer Management System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 reveal">
+    <div>
+        <h2 class="fw-bold mb-1">Event Communications</h2>
+        <p class="text-secondary mb-0">Coordinate with volunteers attending this specific event.</p>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm rounded-4 h-100 reveal" style="min-height: 70vh; display: flex; flex-direction: column;">
+    <!-- Chat Header -->
+    <div class="card-header bg-white border-bottom p-4 d-flex align-items-center rounded-top-4">
+        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+            <i class="bi bi-chat-left-text-fill fs-5"></i>
+        </div>
+        <div>
+            <h5 class="fw-bold mb-0" id="chat-header-title">Loading Event...</h5>
+            <small class="text-success"><i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i><span id="connection-status">Connecting...</span></small>
+        </div>
+    </div>
+
+    <!-- Chat Messages Area -->
+    <div class="card-body p-4 overflow-auto bg-secondary bg-opacity-10" id="chat-messages" style="flex: 1; max-height: 500px; display: flex; flex-direction: column; gap: 15px;">
+        <!-- Messages will be injected here via JS -->
+        <div class="text-center text-muted small my-3" id="loading-history">
+            <div class="spinner-border spinner-border-sm me-2" role="status"></div> Loading message history...
+        </div>
+    </div>
+
+    <!-- Chat Input Area -->
+    <div class="card-footer bg-white border-top p-3 rounded-bottom-4">
+        <form id="chat-form" class="d-flex gap-2 align-items-center">
+            <input type="file" id="chat-file-input" accept="image/*,video/*" style="display: none;">
+            <button type="button" id="chat-attach-btn" class="btn btn-light rounded-circle" title="Attach Image/Video" disabled>
+                <i class="bi bi-paperclip fs-5"></i>
+            </button>
+            <input type="text" id="chat-input" class="form-control rounded-pill px-4 py-2" placeholder="Type your message here..." autocomplete="off" disabled>
+            <button type="submit" id="chat-submit" class="btn btn-primary rounded-pill px-4" disabled>
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div class="modal fade" id="imageLightboxModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-transparent border-0 shadow-none">
+            <div class="modal-header border-0 pb-0 justify-content-end position-absolute top-0 end-0 z-3 p-3">
+                <a id="lightboxDownloadBtn" href="#" download class="btn btn-primary rounded-circle shadow-lg me-2 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" title="Download Image">
+                    <i class="bi bi-download fs-5"></i>
+                </a>
+                <button type="button" class="btn btn-dark rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="bi bi-x-lg fs-5"></i>
+                </button>
+            </div>
+            <div class="modal-body text-center p-0 position-relative">
+                <div class="bg-dark bg-opacity-75 rounded-4 p-2 shadow-lg d-inline-block" style="max-width: 100%;">
+                    <img id="lightboxImage" src="" class="img-fluid rounded-3" style="max-height: 85vh; object-fit: contain;" alt="Full screen image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Socket.IO Client -->
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const token = localStorage.getItem('access_token') || localStorage.getItem('admin_access_token');
+    
+    if (!token) {
+        window.location.href = '/login';
+        return;
+    }
+    
+    let username = 'Volunteer';
+    
+    // Fetch user profile to get the real name
+    try {
+        const res = await fetch('/api/auth/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+            const data = await res.json();
+            if (data.status === 'success') {
+                username = data.data.user ? data.data.user.full_name : data.data.full_name || 'Volunteer';
+            }
+        } else {
+            // Token might be expired
+            localStorage.removeItem('access_token');
+            window.location.href = '/login';
+            return;
+        }
+    } catch (e) {
+        console.error("Could not fetch user profile", e);
+    }
+    
+    // Connect to Socket.IO Server
+    const socket = io();
+    
+    const messagesContainer = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatSubmit = document.getElementById('chat-submit');
+    const statusText = document.getElementById('connection-status');
+    const loadingEl = document.getElementById('loading-history');
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get('event_id');
+    const eventTitle = urlParams.get('title') || 'Event Chat';
+    
+    if (!eventId) {
+        // If no event specified, maybe show an error or redirect
+        document.getElementById('chat-header-title').textContent = 'Error: No Event Selected';
+        messagesContainer.innerHTML = '<div class="text-center text-danger mt-5">Please join a chat room from the My Events page.</div>';
+        return;
+    }
+    
+    document.getElementById('chat-header-title').textContent = eventTitle;
+    
+    // Auto-scroll to bottom
+    const scrollToBottom = () => {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
+    
+    // Create Message Element
+    const renderMessage = (msgData, isSystem = false) => {
+        const div = document.createElement('div');
+        
+        if (isSystem) {
+            div.className = 'text-center text-muted small my-2';
+            div.innerHTML = `<span class="bg-white px-3 py-1 rounded-pill shadow-sm">${msgData.message}</span>`;
+        } else {
+            const isMe = msgData.username === username;
+            
+            // Format time
+            let timeStr = '';
+            if (msgData.timestamp) {
+                const date = new Date(msgData.timestamp);
+                timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            div.className = `d-flex flex-column ${isMe ? 'align-items-end' : 'align-items-start'}`;
+            
+            let mediaHtml = '';
+            if (msgData.media_url) {
+                if (msgData.media_type === 'video') {
+                    mediaHtml = `<div class="mb-2"><video controls style="max-width: 100%; max-height: 250px; border-radius: 8px;"><source src="${msgData.media_url}" type="video/mp4">Your browser does not support the video tag.</video></div>`;
+                } else {
+                    mediaHtml = `<div class="mb-2"><img src="${msgData.media_url}" class="chat-image-preview cursor-pointer" onclick="openLightbox('${msgData.media_url}')" style="max-width: 100%; max-height: 250px; border-radius: 8px; object-fit: contain; cursor: pointer; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1"></div>`;
+                }
+            }
+            
+            const messageHtml = msgData.message ? `<div class="mb-1">${msgData.message}</div>` : '';
+            
+            let bubbleHtml = `
+                <div class="mb-1 ${isMe ? 'd-none' : ''}">
+                    <small class="text-muted fw-bold">${msgData.username}</small>
+                </div>
+                <div class="p-3 rounded-4 shadow-sm ${isMe ? 'bg-primary text-white rounded-bottom-end-0' : 'bg-white text-dark rounded-bottom-start-0'}" style="max-width: 75%; overflow-wrap: break-word;">
+                    ${mediaHtml}
+                    ${messageHtml}
+                </div>
+                <div class="mt-1">
+                    <small class="text-muted" style="font-size: 0.7rem;">${timeStr}</small>
+                </div>
+            `;
+            div.innerHTML = bubbleHtml;
+        }
+        
+        messagesContainer.appendChild(div);
+        scrollToBottom();
+    };
+
+    // Connection Events
+    socket.on('connect', () => {
+        statusText.textContent = 'Connected (Live)';
+        statusText.parentElement.classList.replace('text-danger', 'text-success');
+        
+        chatInput.disabled = false;
+        chatSubmit.disabled = false;
+        document.getElementById('chat-attach-btn').disabled = false;
+        
+        // Request History & Join Specific Event Room
+        socket.emit('join', { username: username, event_id: eventId });
+        socket.emit('get_history', { event_id: eventId });
+    });
+    
+    socket.on('disconnect', () => {
+        statusText.textContent = 'Disconnected. Reconnecting...';
+        statusText.parentElement.classList.replace('text-success', 'text-danger');
+        chatInput.disabled = true;
+        chatSubmit.disabled = true;
+        document.getElementById('chat-attach-btn').disabled = true;
+    });
+    
+    // Incoming Events
+    socket.on('chat_history', (data) => {
+        if(loadingEl) loadingEl.remove();
+        if(data.messages && data.messages.length > 0) {
+            data.messages.forEach(msg => renderMessage(msg));
+        } else {
+            messagesContainer.innerHTML = '<div class="text-center text-muted mt-5"><i class="bi bi-chat-square-dots fs-1 d-block mb-3 opacity-50"></i>No messages yet. Be the first to say hello!</div>';
+        }
+    });
+    
+    socket.on('receive_message', (data) => {
+        // If history empty state is there, remove it
+        if(messagesContainer.innerHTML.includes('No messages yet')) {
+            messagesContainer.innerHTML = '';
+        }
+        renderMessage(data);
+    });
+    
+    socket.on('user_joined', (data) => {
+        if (data.username !== username) {
+            renderMessage({ message: `${data.username} joined the chat.` }, true);
+        }
+    });
+    
+    // Sending Messages
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = chatInput.value.trim();
+        if (text) {
+            socket.emit('send_message', {
+                username: username,
+                message: text,
+                event_id: eventId
+            });
+            chatInput.value = '';
+        }
+    });
+    
+    // File Upload Logic
+    const attachBtn = document.getElementById('chat-attach-btn');
+    const fileInput = document.getElementById('chat-file-input');
+    
+    attachBtn.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        // Check size (<10MB)
+        if (file.size > 10 * 1024 * 1024) {
+            alert('File is too large. Max size is 10MB.');
+            fileInput.value = '';
+            return;
+        }
+        
+        // Disable UI
+        attachBtn.disabled = true;
+        chatSubmit.disabled = true;
+        chatInput.disabled = true;
+        const originalIcon = attachBtn.innerHTML;
+        attachBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        try {
+            const res = await fetch('/api/chat/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+            
+            if (data.status === 'success') {
+                const text = chatInput.value.trim();
+                socket.emit('send_message', {
+                    username: username,
+                    message: text, // Optional caption
+                    event_id: eventId,
+                    media_url: data.data.media_url,
+                    media_type: data.data.media_type
+                });
+                chatInput.value = '';
+            } else {
+                alert(data.message || 'Upload failed');
+            }
+        } catch (err) {
+            console.error('Upload error:', err);
+            alert('Failed to upload media. Please check your connection.');
+        } finally {
+            fileInput.value = '';
+            attachBtn.disabled = false;
+            chatSubmit.disabled = false;
+            chatInput.disabled = false;
+            attachBtn.innerHTML = originalIcon;
+        }
+    });
+});
+
+// Lightbox Logic
+function openLightbox(imageUrl) {
+    document.getElementById('lightboxImage').src = imageUrl;
+    document.getElementById('lightboxDownloadBtn').href = imageUrl;
+    
+    // Extract filename for download attribute
+    const filename = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+    document.getElementById('lightboxDownloadBtn').setAttribute('download', 'chat_image_' + filename);
+    
+    const modalEl = document.getElementById('imageLightboxModal');
+    // Move to body to prevent z-index/stacking context issues with the dashboard layout
+    if (modalEl.parentNode !== document.body) {
+        document.body.appendChild(modalEl);
+    }
+    
+    const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    modal.show();
+}
+</script>
+{% endblock %}

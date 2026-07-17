@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}Settings — NGO Volunteer System{% endblock %}
+
+{% block page_title %}Settings{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 animate-fade-in-up">
+    <div class="row g-4">
+        
+        <!-- Left Column: Navigation or Account Overview -->
+        <div class="col-lg-4">
+            <div class="card bg-tertiary border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Account Settings</h5>
+                    <div class="nav flex-column nav-pills me-3" id="settings-tabs" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active text-start mb-2 rounded-pill fw-medium" id="tab-notifications" data-bs-toggle="pill" data-bs-target="#content-notifications" type="button" role="tab" aria-selected="true">
+                            <i class="bi bi-bell me-2"></i> Notifications
+                        </button>
+                        <button class="nav-link text-start mb-2 rounded-pill fw-medium" id="tab-security" data-bs-toggle="pill" data-bs-target="#content-security" type="button" role="tab" aria-selected="false">
+                            <i class="bi bi-shield-lock me-2"></i> Security
+                        </button>
+                        <button class="nav-link text-start mb-2 rounded-pill fw-medium" id="tab-appearance" data-bs-toggle="pill" data-bs-target="#content-appearance" type="button" role="tab" aria-selected="false">
+                            <i class="bi bi-palette me-2"></i> Appearance
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Settings Content -->
+        <div class="col-lg-8">
+            <div class="card bg-tertiary border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="tab-content" id="settings-tabContent">
+                        
+                        <!-- Notifications Settings -->
+                        <div class="tab-pane fade show active" id="content-notifications" role="tabpanel" tabindex="0">
+                            <h4 class="fw-bold mb-4">Notification Preferences</h4>
+                            
+                            <div class="mb-4 pb-4 border-bottom border-secondary">
+                                <h6 class="fw-bold text-primary mb-3">Email Notifications</h6>
+                                
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="notif-events" checked>
+                                    <label class="form-check-label" for="notif-events">
+                                        <strong>New Event Announcements</strong><br>
+                                        <small class="text-muted">Get notified when new volunteer opportunities are posted.</small>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="notif-requests" checked>
+                                    <label class="form-check-label" for="notif-requests">
+                                        <strong>Request Updates</strong><br>
+                                        <small class="text-muted">Receive updates when your event join requests are approved or rejected.</small>
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="notif-reminders" checked>
+                                    <label class="form-check-label" for="notif-reminders">
+                                        <strong>Event Reminders</strong><br>
+                                        <small class="text-muted">Receive a reminder 24 hours before your approved events.</small>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6 class="fw-bold text-primary mb-3">In-App Notifications</h6>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="notif-push" checked>
+                                    <label class="form-check-label" for="notif-push">
+                                        <strong>Enable In-App Alerts</strong><br>
+                                        <small class="text-muted">Show a red badge in the sidebar when you have unread notifications.</small>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary rounded-pill px-4" onclick="saveSettings(this)">Save Preferences</button>
+                        </div>
+
+                        <!-- Security Settings -->
+                        <div class="tab-pane fade" id="content-security" role="tabpanel" tabindex="0">
+                            <h4 class="fw-bold mb-4">Security & Password</h4>
+                            
+                            <div class="mb-4 pb-4 border-bottom border-secondary">
+                                <h6 class="fw-bold text-primary mb-3">Change Password</h6>
+                                <form onsubmit="event.preventDefault(); alert('Password updated successfully!');">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small">Current Password</label>
+                                        <input type="password" class="form-control" placeholder="Enter current password">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small">New Password</label>
+                                        <input type="password" class="form-control" placeholder="Enter new password">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label text-muted small">Confirm New Password</label>
+                                        <input type="password" class="form-control" placeholder="Confirm new password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary rounded-pill px-4">Update Password</button>
+                                </form>
+                            </div>
+                            
+                            <div>
+                                <h6 class="fw-bold text-primary mb-3">Two-Factor Authentication</h6>
+                                <p class="text-muted small mb-3">Add an extra layer of security to your account by requiring a code when logging in.</p>
+                                <button class="btn btn-outline-primary rounded-pill px-4">Enable 2FA</button>
+                            </div>
+                        </div>
+
+                        <!-- Appearance Settings -->
+                        <div class="tab-pane fade" id="content-appearance" role="tabpanel" tabindex="0">
+                            <h4 class="fw-bold mb-4">Appearance</h4>
+                            
+                            <h6 class="fw-bold text-primary mb-3">Theme Preference</h6>
+                            <p class="text-muted small mb-3">Customize how the application looks on your device.</p>
+                            
+                            <div class="d-flex gap-3 mb-4">
+                                <div class="form-check theme-option">
+                                    <input class="form-check-input" type="radio" name="themeRadio" id="themeLight" value="light">
+                                    <label class="form-check-label d-flex flex-column align-items-center p-3 border rounded cursor-pointer" for="themeLight">
+                                        <i class="bi bi-sun fs-2 mb-2 text-warning"></i>
+                                        <span>Light Mode</span>
+                                    </label>
+                                </div>
+                                <div class="form-check theme-option">
+                                    <input class="form-check-input" type="radio" name="themeRadio" id="themeDark" value="dark" checked>
+                                    <label class="form-check-label d-flex flex-column align-items-center p-3 border rounded cursor-pointer border-primary" for="themeDark">
+                                        <i class="bi bi-moon-stars fs-2 mb-2 text-primary"></i>
+                                        <span>Dark Mode</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary rounded-pill px-4" onclick="saveSettings(this)">Save Appearance</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function saveSettings(btn) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Saving...';
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            btn.innerHTML = '<i class="bi bi-check-circle me-2"></i> Saved Successfully';
+            btn.classList.replace('btn-primary', 'btn-success');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.replace('btn-success', 'btn-primary');
+                btn.disabled = false;
+            }, 2000);
+        }, 800);
+    }
+</script>
+<style>
+    /* Custom styling for appearance radios to look like selectable cards */
+    .theme-option .form-check-input {
+        display: none;
+    }
+    .theme-option label {
+        transition: all 0.2s ease;
+        background-color: var(--bs-body-bg);
+        width: 120px;
+    }
+    .theme-option .form-check-input:checked + label {
+        border-color: var(--bs-primary) !important;
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        box-shadow: 0 0 0 0.1rem rgba(var(--bs-primary-rgb), 0.25);
+    }
+    .theme-option label:hover {
+        border-color: var(--bs-primary) !important;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}

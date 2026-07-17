@@ -1,0 +1,146 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin Dashboard — NGO Volunteer System{% endblock %}
+
+{% block page_title %}Admin Overview{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-4">
+    <!-- Stat 1: Total Users -->
+    <div class="col-md-6 col-lg-3">
+        <div class="admin-stat-card primary animate-fade-in-up stagger-1">
+            <div class="stat-icon bg-gradient-primary">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" id="statTotalVolunteers">--</div>
+                <div class="stat-label">Total Volunteers</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stat 2: Total Events -->
+    <div class="col-md-6 col-lg-3">
+        <div class="admin-stat-card success animate-fade-in-up stagger-2">
+            <div class="stat-icon bg-gradient-success">
+                <i class="bi bi-calendar2-check-fill"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" id="statTotalEvents">--</div>
+                <div class="stat-label">Total Events</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stat 3: Pending Requests -->
+    <div class="col-md-6 col-lg-3">
+        <div class="admin-stat-card warning animate-fade-in-up stagger-3">
+            <div class="stat-icon bg-gradient-warning">
+                <i class="bi bi-inbox-fill"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" id="statPendingRequests">--</div>
+                <div class="stat-label">Pending Requests</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stat 4: Completed Events -->
+    <div class="col-md-6 col-lg-3">
+        <div class="admin-stat-card danger animate-fade-in-up stagger-4">
+            <div class="stat-icon bg-gradient-danger">
+                <i class="bi bi-award-fill"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" id="statCompletedEvents">--</div>
+                <div class="stat-label">Completed Events</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <!-- Main Chart: Registration Trend -->
+    <div class="col-lg-8">
+        <div class="admin-panel animate-fade-in-up stagger-5">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title" id="trendTitle">Event Trend (Last 6 Months)</h3>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle rounded-pill" type="button" data-bs-toggle="dropdown" id="trendDropdownBtn">
+                        Last 6 Months
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li><a class="dropdown-item" href="#" onclick="updateTrend('30_days', 'Last 30 Days')">Last 30 Days</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateTrend('6_months', 'Last 6 Months')">Last 6 Months</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="updateTrend('this_year', 'This Year')">This Year</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chart-container">
+                <canvas id="registrationChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Secondary Chart: Event Status -->
+    <div class="col-lg-4">
+        <div class="admin-panel animate-fade-in-up stagger-6">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title">Events by Category</h3>
+            </div>
+            <div class="chart-container" style="height: 260px; margin-top: 20px;">
+                <canvas id="eventsChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <!-- Recent Users Table -->
+    <div class="col-lg-8">
+        <div class="admin-panel animate-fade-in-up stagger-7">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title">Recently Registered Users</h3>
+                <a href="#" class="btn btn-sm btn-link text-decoration-none">View All</a>
+            </div>
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Joined Date</th>
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentUsersTable">
+                        <!-- Populated by Javascript -->
+                        <tr><td colspan="5" class="text-center text-muted">Loading users...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Latest Activities -->
+    <div class="col-lg-4">
+        <div class="admin-panel animate-fade-in-up stagger-8">
+            <div class="admin-panel-header">
+                <h3 class="admin-panel-title">Latest Activities</h3>
+            </div>
+            <ul class="activity-list" id="latestActivitiesList">
+                <!-- Populated by Javascript -->
+                <li class="activity-item text-muted">Loading activities...</li>
+            </ul>
+            <div class="mt-auto pt-3 text-center">
+                <a href="#" class="btn btn-sm btn-outline-secondary w-100 rounded-pill">View Activity Log</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_dashboard.js') }}"></script>
+{% endblock %}

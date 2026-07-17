@@ -1,0 +1,13 @@
+{% macro placeholder(title, height='300px') %}
+<div class="card h-100 border-0 shadow-sm">
+    <div class="card-body d-flex flex-column">
+        <h6 class="card-title text-muted fw-bold mb-4">{{ title }}</h6>
+        <div class="flex-grow-1 d-flex align-items-center justify-content-center bg-light rounded" style="min-height: {{ height }}; border: 1px dashed var(--border-color);">
+            <div class="text-center text-muted">
+                <i class="bi bi-bar-chart-line" style="font-size: 3rem; opacity: 0.5;"></i>
+                <p class="mt-2 small">Chart Placeholder<br>(Integrate Chart.js/ApexCharts here)</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

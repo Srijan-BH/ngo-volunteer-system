@@ -1,0 +1,150 @@
+{% extends "auth_base.html" %}
+
+{% block title %}Create Account — NGO Volunteer System{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    
+    <!-- Left Brand Panel -->
+    <div class="auth-brand-panel">
+        <div class="auth-shape auth-shape-1"></div>
+        <div class="auth-shape auth-shape-2"></div>
+        <div class="auth-shape auth-shape-3"></div>
+        
+        <div class="auth-brand-content">
+            <div class="brand-logo">
+                <i class="bi bi-heart-pulse-fill me-2"></i>NGO Vol.
+            </div>
+            <h2>Join Our Community</h2>
+            <p>Create your free account and start making a difference today. Connect with causes you care about and track your impact.</p>
+            
+            <div class="mt-5 d-none d-lg-block">
+                <div class="d-flex align-items-center gap-3 mb-3" style="opacity: 0.85;">
+                    <div class="rounded-circle bg-white bg-opacity-25 p-2"><i class="bi bi-person-plus fs-5"></i></div>
+                    <span class="small">Free Forever for Volunteers</span>
+                </div>
+                <div class="d-flex align-items-center gap-3 mb-3" style="opacity: 0.85;">
+                    <div class="rounded-circle bg-white bg-opacity-25 p-2"><i class="bi bi-lightning-charge fs-5"></i></div>
+                    <span class="small">Smart Event Matching</span>
+                </div>
+                <div class="d-flex align-items-center gap-3" style="opacity: 0.85;">
+                    <div class="rounded-circle bg-white bg-opacity-25 p-2"><i class="bi bi-award fs-5"></i></div>
+                    <span class="small">Earn Volunteer Certificates</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Form Panel -->
+    <div class="auth-form-panel">
+        <div class="auth-form-container animate-fade-in-up">
+            
+            <!-- Header -->
+            <div class="auth-form-header">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="/" class="text-muted text-decoration-none small"><i class="bi bi-arrow-left me-1"></i> Back to Home</a>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme"><i class="bi bi-moon"></i></button>
+                </div>
+                <h1>Create Account</h1>
+                <p>Fill in the details below to get started.</p>
+            </div>
+            
+            <!-- Signup Form -->
+            <form id="signupForm" novalidate>
+                
+                <!-- Full Name -->
+                <div class="auth-input-group">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="signupName" name="full_name" placeholder="Full Name" required autocomplete="name">
+                        <label for="signupName"><i class="bi bi-person me-2"></i>Full Name <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="field-error"></div>
+                </div>
+                
+                <!-- Email -->
+                <div class="auth-input-group">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="signupEmail" name="email" placeholder="Email" required autocomplete="email">
+                        <label for="signupEmail"><i class="bi bi-envelope me-2"></i>Email Address <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="field-error"></div>
+                </div>
+                
+                <!-- Mobile -->
+                <div class="auth-input-group">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" id="signupMobile" name="mobile" placeholder="Mobile" required autocomplete="tel">
+                        <label for="signupMobile"><i class="bi bi-phone me-2"></i>Mobile Number <span class="text-danger">*</span></label>
+                    </div>
+                    <div class="field-error"></div>
+                </div>
+                
+                <!-- Password -->
+                <div class="auth-input-group">
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Password" required autocomplete="new-password" style="padding-right: 48px;">
+                        <label for="signupPassword"><i class="bi bi-lock me-2"></i>Password <span class="text-danger">*</span></label>
+                        <button type="button" class="password-toggle" aria-label="Show password"><i class="bi bi-eye"></i></button>
+                    </div>
+                    <div class="field-error"></div>
+                    
+                    <!-- Password Strength Meter -->
+                    <div class="password-strength">
+                        <div class="strength-bars">
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                        </div>
+                        <span class="strength-label"></span>
+                    </div>
+                    
+                    <!-- Password Requirements -->
+                    <ul class="password-requirements">
+                        <li class="unmet"><i class="bi"></i> At least 8 characters</li>
+                        <li class="unmet"><i class="bi"></i> One uppercase letter (A–Z)</li>
+                        <li class="unmet"><i class="bi"></i> One lowercase letter (a–z)</li>
+                        <li class="unmet"><i class="bi"></i> One digit (0–9)</li>
+                        <li class="unmet"><i class="bi"></i> One special character (!@#$%)</li>
+                    </ul>
+                </div>
+                
+                <!-- Confirm Password -->
+                <div class="auth-input-group">
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="signupConfirmPassword" name="confirm_password" placeholder="Confirm Password" required autocomplete="new-password" style="padding-right: 48px;">
+                        <label for="signupConfirmPassword"><i class="bi bi-lock-fill me-2"></i>Confirm Password <span class="text-danger">*</span></label>
+                        <button type="button" class="password-toggle" aria-label="Show password"><i class="bi bi-eye"></i></button>
+                    </div>
+                    <div class="field-error"></div>
+                </div>
+                
+                <!-- Terms -->
+                <div class="form-check mb-4">
+                        <input type="checkbox" class="form-check-input" id="signupTerms" name="terms" required>
+                        <label class="form-check-label small text-muted" for="signupTerms">
+                            I agree to the <a href="/terms" class="fw-semibold">Terms of Service</a> and <a href="/privacy" class="fw-semibold">Privacy Policy</a>
+                        </label>
+                </div>
+                
+                <!-- Submit -->
+                <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill shadow-sm auth-submit-btn">
+                    <span class="btn-text"><i class="bi bi-person-plus me-2"></i> Create Account</span>
+                    <span class="btn-loading"><span class="spinner-border spinner-border-sm me-2"></span> Creating account...</span>
+                </button>
+            </form>
+            
+
+            
+            <!-- Footer Link -->
+            <div class="auth-links">
+                Already have an account? <a href="/login">Sign in</a>
+                <br>
+                <a href="/admin/login" class="text-muted small mt-3 d-inline-block"><i class="bi bi-shield-lock me-1"></i> Admin Login</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

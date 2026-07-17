@@ -1,0 +1,38 @@
+# NGO Volunteer Management System — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# ─── Core Framework ───────────────────────────────────────────────────────────
+Flask==3.0.3
+Werkzeug==3.0.3
+
+# ─── CORS ────────────────────────────────────────────────────────────────────
+Flask-Cors==4.0.1
+
+# ─── Database ────────────────────────────────────────────────────────────────
+pymongo==4.7.3
+dnspython==2.6.1          # Required for mongodb+srv:// URIs (Atlas)
+
+# ─── Authentication ───────────────────────────────────────────────────────────
+PyJWT==2.8.0
+bcrypt==4.1.3
+
+# ─── Environment Variables ───────────────────────────────────────────────────
+python-dotenv==1.0.1
+
+# ─── Utilities ────────────────────────────────────────────────────────────────
+python-dateutil==2.9.0.post0
+# ─── Real-Time ────────────────────────────────────────────────────────────────
+Flask-SocketIO==5.3.6
+eventlet==0.36.1
+
+# ─── Development / Testing ───────────────────────────────────────────────────
+pytest==8.2.2
+pytest-flask==1.3.0
+coverage==7.5.3
+
+# ─── Optional: Email ─────────────────────────────────────────────────────────
+# Flask-Mail==0.10.0
+
+# ─── Security ──────────────────────────────────────────────────────────────────
+Flask-Limiter==3.8.0
+Flask-Talisman==1.1.0

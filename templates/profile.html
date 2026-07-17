@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile — NGO Volunteer System{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block page_title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-2">
+
+    <!-- Header Section (Avatar Upload) -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="profile-header-card animate-fade-in-up stagger-1">
+                <div class="profile-avatar-container">
+                    <img id="profileAvatar" src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="Profile Picture" class="profile-avatar">
+                    <label for="avatarInput" class="avatar-upload-overlay" title="Upload new image">
+                        <i class="bi bi-camera-fill"></i>
+                    </label>
+                    <input type="file" id="avatarInput" class="avatar-input" accept="image/*">
+                </div>
+                <!-- Profile Header -->
+                <div class="text-center mt-5 pt-4">
+                    <h3 class="fw-bold mb-1" id="profileHeaderName">Loading...</h3>
+                    <p class="text-secondary mb-3" id="profileHeaderDate">Volunteer since...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Left Column (Personal Details & Password) -->
+        <div class="col-lg-7 mb-4">
+            
+            <!-- Personal Details Form -->
+            <div class="profile-card animate-fade-in-up stagger-2">
+                <h4 class="profile-card-title"><i class="bi bi-person-lines-fill"></i> Personal Information</h4>
+                
+                <form id="profileForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="fullName" placeholder="John Doe" value="John Doe" required>
+                                <label for="fullName">Full Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" id="emailAddress" placeholder="john@example.com" value="john.doe@example.com" readonly>
+                                <label for="emailAddress">Email Address (Read-only)</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="tel" class="form-control" id="mobileNumber" placeholder="+1234567890" value="+1 555-0198" required>
+                                <label for="mobileNumber">Mobile Number</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="city" placeholder="City" value="New York">
+                                <label for="city">City</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mt-4">
+                            <h5 class="fs-6 fw-bold mb-3 text-secondary">Skills & Interests</h5>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label text-muted small fw-semibold">Skills (Press Enter or Comma to add)</label>
+                            <div id="skillsContainer" class="tag-input-container">
+                                <input type="text" class="tag-input" placeholder="Add a skill...">
+                            </div>
+                            <input type="hidden" id="skillsData" value="Teaching,First Aid,Event Planning">
+                        </div>
+                        
+                        <div class="col-12 mt-3">
+                            <label class="form-label text-muted small fw-semibold">Interests (Press Enter or Comma to add)</label>
+                            <div id="interestsContainer" class="tag-input-container">
+                                <input type="text" class="tag-input" placeholder="Add an interest...">
+                            </div>
+                            <input type="hidden" id="interestsData" value="Education,Environment,Animal Welfare">
+                        </div>
+
+                        <div class="col-12 mt-4 text-end">
+                            <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold shadow-sm">Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Password Change Form -->
+            <div class="profile-card animate-fade-in-up stagger-3 mt-4">
+                <h4 class="profile-card-title"><i class="bi bi-shield-lock-fill"></i> Security</h4>
+                
+                <form id="passwordForm">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="currentPassword" placeholder="Current Password" required>
+                                <label for="currentPassword">Current Password</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="newPassword" placeholder="New Password" required minlength="8">
+                                <label for="newPassword">New Password</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirm Password" required minlength="8">
+                                <label for="confirmNewPassword">Confirm New Password</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 mt-3 text-end">
+                            <button type="submit" class="btn btn-outline-danger rounded-pill px-4 fw-semibold">Update Password</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+
+        <!-- Right Column (Volunteer History) -->
+        <div class="col-lg-5 mb-4">
+            <div class="profile-card animate-fade-in-up stagger-4">
+                <h4 class="profile-card-title"><i class="bi bi-clock-history"></i> Volunteer History</h4>
+                
+                <div class="d-flex justify-content-between mb-4 mt-3">
+                    <div class="text-center p-3 rounded bg-tertiary border flex-fill me-2">
+                        <h3 class="fw-bold text-primary mb-0" id="histStatEvents">0</h3>
+                        <span class="text-muted small text-uppercase">Events</span>
+                    </div>
+                    <div class="text-center p-3 rounded bg-tertiary border flex-fill ms-2">
+                        <h3 class="fw-bold text-primary mb-0" id="histStatHours">0h</h3>
+                        <span class="text-muted small text-uppercase">Logged</span>
+                    </div>
+                </div>
+
+                <div class="history-timeline" id="volunteerHistoryTimeline">
+                    <div class="text-center text-muted py-3">
+                        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Loading history...
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <button class="btn btn-link text-decoration-none fw-semibold">View Full History <i class="bi bi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Global Toast Container is typically in base.html, but ensuring it exists for JS -->
+<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1055;"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}

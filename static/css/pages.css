@@ -1,0 +1,321 @@
+/*
+ * Pages Specific Styles — About, Contact, FAQ
+ * These extend main.css + landing.css
+ */
+
+/* ========================================================================
+   Page Hero (reusable mini-hero for inner pages)
+   ======================================================================== */
+.page-hero {
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.06) 0%, rgba(139, 92, 246, 0.06) 100%);
+}
+.page-hero .hero-bg-shapes { z-index: 0; }
+.page-hero .container { position: relative; z-index: 1; }
+
+/* ========================================================================
+   Timeline
+   ======================================================================== */
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    width: 50%;
+}
+.timeline-item:nth-child(odd) {
+    padding-right: 3rem;
+    text-align: right;
+}
+.timeline-item:nth-child(even) {
+    padding-left: 3rem;
+    margin-left: 50%;
+}
+.timeline-dot {
+    position: absolute;
+    top: 0.5rem;
+    width: 18px;
+    height: 18px;
+    background: var(--primary);
+    border: 4px solid var(--bg-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+    z-index: 2;
+}
+.timeline-item:nth-child(odd) .timeline-dot {
+    right: -9px;
+}
+.timeline-item:nth-child(even) .timeline-dot {
+    left: -9px;
+}
+.timeline-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.timeline-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+.timeline-year {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    padding: 0.25rem 0.8rem;
+    border-radius: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Timeline responsive */
+@media (max-width: 767.98px) {
+    .timeline::before {
+        left: 20px;
+    }
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 0;
+        margin-left: 0;
+        text-align: left;
+    }
+    .timeline-item:nth-child(odd) {
+        padding-right: 0;
+        padding-left: 50px;
+        text-align: left;
+    }
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot {
+        left: 11px;
+        right: auto;
+    }
+}
+
+/* ========================================================================
+   Team Cards
+   ======================================================================== */
+.team-card {
+    text-align: center;
+    border: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+.team-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.team-img-wrapper img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.team-card:hover .team-img-wrapper img {
+    transform: scale(1.05);
+}
+.team-socials {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    transition: bottom 0.3s ease;
+}
+.team-card:hover .team-socials {
+    bottom: 0;
+}
+.team-socials a {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+}
+.team-socials a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* ========================================================================
+   Values Cards
+   ======================================================================== */
+.value-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+.value-icon {
+    width: 80px;
+    height: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+    transition: transform 0.3s;
+}
+.value-card:hover .value-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* ========================================================================
+   FAQ Accordion
+   ======================================================================== */
+.faq-accordion .accordion-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+.faq-accordion .accordion-button {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1.1rem 1.5rem;
+    box-shadow: none !important;
+    border-radius: var(--radius-md) !important;
+}
+.faq-accordion .accordion-button::after {
+    background-image: none;
+    content: '\f4fe'; /* bi-plus-circle */
+    font-family: 'bootstrap-icons';
+    font-size: 1.2rem;
+    color: var(--primary);
+    transition: transform 0.3s;
+}
+.faq-accordion .accordion-button:not(.collapsed)::after {
+    content: '\f2e1'; /* bi-dash-circle */
+    transform: rotate(0);
+}
+.faq-accordion .accordion-button:not(.collapsed) {
+    color: var(--primary);
+    background: var(--bg-secondary);
+}
+.faq-accordion .accordion-body {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ========================================================================
+   Contact Form
+   ======================================================================== */
+.contact-info-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+.contact-info-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+}
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+}
+.contact-info-item:last-child {
+    margin-bottom: 0;
+}
+.contact-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    font-size: 1.1rem;
+}
+
+/* Map placeholder */
+.map-placeholder {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    height: 350px;
+    position: relative;
+    background: var(--bg-tertiary);
+}
+.map-placeholder iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+.map-placeholder .map-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--text-muted);
+}
+
+/* ========================================================================
+   Scroll Reveal Animation
+   ======================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}

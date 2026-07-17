@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% import 'components/ui/buttons.html' as buttons %}
+{% import 'components/ui/cards.html' as cards %}
+{% import 'components/ui/forms.html' as forms %}
+{% import 'components/ui/modal.html' as modals %}
+{% import 'components/ui/breadcrumb.html' as breadcrumbs %}
+{% import 'components/ui/pagination.html' as pagination %}
+{% import 'components/ui/loading.html' as loading %}
+{% import 'components/ui/charts.html' as charts %}
+
+{% block page_title %}UI Component Library{% endblock %}
+
+{% block content %}
+<div class="row g-4 mb-5">
+    
+    <!-- Breadcrumbs -->
+    <div class="col-12">
+        <h4 class="mb-3">Breadcrumbs</h4>
+        {{ breadcrumbs.render([
+            {'label': 'Home', 'url': '/'},
+            {'label': 'Library', 'url': '/library'},
+            {'label': 'UI Components', 'url': '#'}
+        ]) }}
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="col-12">
+        <h4 class="mb-3">Stat Cards</h4>
+        <div class="row g-3">
+            <div class="col-md-3">
+                {{ cards.stat('Total Volunteers', '1,234', 'bi-people-fill', color='primary', trend='up', trend_text='12% vs last month') }}
+            </div>
+            <div class="col-md-3">
+                {{ cards.stat('Active Events', '42', 'bi-calendar-event', color='success', trend='up', trend_text='5 new this week') }}
+            </div>
+            <div class="col-md-3">
+                {{ cards.stat('Hours Logged', '8,450', 'bi-clock-history', color='warning', trend='down', trend_text='2% vs last month') }}
+            </div>
+            <div class="col-md-3">
+                {{ cards.stat('Pending Approvals', '15', 'bi-hourglass-split', color='danger') }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="col-12 col-lg-6">
+        <h4 class="mb-3">Buttons</h4>
+        {% call cards.default(title='Standard Buttons', class='h-100') %}
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                {{ buttons.primary('Primary') }}
+                {{ buttons.outline_primary('Outline Primary') }}
+                {{ buttons.danger('Danger') }}
+                {{ buttons.primary('With Icon', icon='bi-star') }}
+                {{ buttons.icon_btn('bi-gear', tooltip='Settings') }}
+            </div>
+            
+            <h6 class="mb-3">Toasts & Modals</h6>
+            <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-success" onclick="showToast('Success', 'Action completed successfully!', 'success')">
+                    Show Success Toast
+                </button>
+                <button class="btn btn-outline-danger" onclick="showToast('Error', 'Something went wrong.', 'danger')">
+                    Show Error Toast
+                </button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Open Modal
+                </button>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                    Confirm Action
+                </button>
+            </div>
+        {% endcall %}
+    </div>
+
+    <!-- Forms -->
+    <div class="col-12 col-lg-6">
+        <h4 class="mb-3">Forms</h4>
+        {% call cards.default(title='Floating Labels', class='h-100') %}
+            <form>
+                {{ forms.floating_input('email', 'Email Address', type='email', required=true) }}
+                {{ forms.floating_select('role', 'User Role', [('admin', 'Admin'), ('volunteer', 'Volunteer')], selected='volunteer') }}
+                {{ forms.floating_textarea('bio', 'Short Bio', rows=2) }}
+                {{ forms.switch('notifications', 'Enable Email Notifications', checked=true) }}
+            </form>
+        {% endcall %}
+    </div>
+
+    <!-- Glassmorphism & Skeletons -->
+    <div class="col-12 col-lg-6">
+        <h4 class="mb-3">Glassmorphism</h4>
+        <div class="p-4 rounded-3" style="background: url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=800&auto=format&fit=crop') center/cover;">
+            {% call cards.glass(title='Glass Panel') %}
+                <p>This panel uses a backdrop filter to create a frosted glass effect over the background image.</p>
+                {{ buttons.primary('Read More') }}
+            {% endcall %}
+        </div>
+    </div>
+    
+    <div class="col-12 col-lg-6">
+        <h4 class="mb-3">Loading Skeletons</h4>
+        {% call cards.default(title='Skeleton Placeholders', class='h-100') %}
+            {{ loading.card() }}
+        {% endcall %}
+    </div>
+
+    <!-- Charts Placeholder -->
+    <div class="col-12">
+        <h4 class="mb-3">Charts</h4>
+        <div class="row g-3">
+            <div class="col-md-6">
+                {{ charts.placeholder('Monthly Registrations', height='250px') }}
+            </div>
+            <div class="col-md-6">
+                {{ charts.placeholder('Event Categories', height='250px') }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="col-12">
+        <h4 class="mb-3">Pagination</h4>
+        {% call cards.default() %}
+            {{ pagination.render({'page': 2, 'total_pages': 5, 'has_prev': true, 'has_next': true}, 'theme_test') }}
+        {% endcall %}
+    </div>
+</div>
+
+<!-- Modals Definitions -->
+{% call modals.default('exampleModal', 'Standard Modal', size='modal-lg') %}
+    <p>This is a standard modal containing typical body text. You can put forms or other components in here.</p>
+    <hr>
+    <div class="text-end">
+        <button type="button" class="btn btn-light me-2" data-bs-dismiss="modal">Close</button>
+        {{ buttons.primary('Save Changes') }}
+    </div>
+{% endcall %}
+
+{{ modals.confirm('confirmModal', 'Delete Record?', 'Are you sure you want to delete this record? This action cannot be undone.', confirm_text='Delete') }}
+
+{% endblock %}

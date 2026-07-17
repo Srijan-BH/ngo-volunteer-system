@@ -1,0 +1,359 @@
+{% extends "public_base.html" %}
+
+{% block title %}FAQ — NGO Volunteer Management System{% endblock %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="page-hero text-center">
+    <div class="hero-bg-shapes">
+        <div class="shape-blob shape-1"></div>
+        <div class="shape-blob shape-2"></div>
+    </div>
+    <div class="container">
+        <span class="badge bg-primary bg-opacity-10 text-primary mb-3 py-2 px-3 rounded-pill fw-semibold">
+            <i class="bi bi-question-circle me-1"></i> Help Center
+        </span>
+        <h1 class="display-5 fw-bold mb-3">Frequently Asked Questions</h1>
+        <p class="lead text-secondary mx-auto" style="max-width: 650px;">
+            Find answers to the most common questions about volunteering, events, and using our platform.
+        </p>
+        
+        <!-- Search Bar -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-6 col-md-8">
+                <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                    <span class="input-group-text bg-white border-0 ps-4"><i class="bi bi-search text-muted"></i></span>
+                    <input type="text" class="form-control border-0 py-3" id="faqSearch" placeholder="Type to search FAQs..." aria-label="Search FAQs">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Categories -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-5">
+            
+            <!-- FAQ Left Column – Categories Nav -->
+            <div class="col-lg-3 reveal">
+                <div class="card border-0 shadow-sm rounded-4 p-3 sticky-top" style="top: 90px;">
+                    <h6 class="text-uppercase fw-bold text-muted px-3 pt-2 pb-1 small">Categories</h6>
+                    <nav class="nav flex-column">
+                        <a class="nav-link px-3 py-2 rounded fw-medium active" href="#general" data-category="general">
+                            <i class="bi bi-house me-2"></i> General
+                        </a>
+                        <a class="nav-link px-3 py-2 rounded fw-medium" href="#volunteering" data-category="volunteering">
+                            <i class="bi bi-hand-thumbs-up me-2"></i> Volunteering
+                        </a>
+                        <a class="nav-link px-3 py-2 rounded fw-medium" href="#events" data-category="events">
+                            <i class="bi bi-calendar-event me-2"></i> Events
+                        </a>
+                        <a class="nav-link px-3 py-2 rounded fw-medium" href="#account" data-category="account">
+                            <i class="bi bi-person-circle me-2"></i> Account
+                        </a>
+                        <a class="nav-link px-3 py-2 rounded fw-medium" href="#ngo-partners" data-category="ngo-partners">
+                            <i class="bi bi-building me-2"></i> NGO Partners
+                        </a>
+                        <a class="nav-link px-3 py-2 rounded fw-medium" href="#technical" data-category="technical">
+                            <i class="bi bi-gear me-2"></i> Technical
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- FAQ Right Column – Accordions -->
+            <div class="col-lg-9">
+                
+                <!-- General -->
+                <div id="general" class="mb-5 faq-category reveal">
+                    <h4 class="fw-bold mb-4"><i class="bi bi-house me-2 text-primary"></i> General Questions</h4>
+                    <div class="accordion faq-accordion" id="accordionGeneral">
+                        <div class="accordion-item faq-item" data-keywords="what is ngo volunteer platform about">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g1">
+                                    What is the NGO Volunteer Management System?
+                                </button>
+                            </h2>
+                            <div id="g1" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    It is a comprehensive digital platform that connects passionate volunteers with NGOs and community organizations. We simplify the process of finding, joining, and managing volunteer activities — from event discovery and registration to impact tracking and reporting.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="free cost money paid pricing">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g2">
+                                    Is the platform free to use?
+                                </button>
+                            </h2>
+                            <div id="g2" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    Yes! The platform is completely free for individual volunteers. NGOs and organizations may have access to premium features under our partnership program, but volunteering and event participation will always remain free.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="who use benefit target audience">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#g3">
+                                    Who can benefit from this platform?
+                                </button>
+                            </h2>
+                            <div id="g3" class="accordion-collapse collapse" data-bs-parent="#accordionGeneral">
+                                <div class="accordion-body">
+                                    Anyone who wants to make a positive impact! Whether you're a student looking for community service hours, a professional wanting to give back, or an NGO needing volunteer support — our platform is designed for you. We welcome individuals of all ages, backgrounds, and skill levels.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Volunteering -->
+                <div id="volunteering" class="mb-5 faq-category reveal">
+                    <h4 class="fw-bold mb-4"><i class="bi bi-hand-thumbs-up me-2 text-primary"></i> Volunteering</h4>
+                    <div class="accordion faq-accordion" id="accordionVolunteering">
+                        <div class="accordion-item faq-item" data-keywords="how start begin sign up register volunteer">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#v1">
+                                    How do I start volunteering?
+                                </button>
+                            </h2>
+                            <div id="v1" class="accordion-collapse collapse" data-bs-parent="#accordionVolunteering">
+                                <div class="accordion-body">
+                                    Getting started is simple: <strong>1)</strong> Create a free account using the Register button. <strong>2)</strong> Complete your profile with your skills and interests. <strong>3)</strong> Browse available events and click "Volunteer" on any that interest you. <strong>4)</strong> Once approved, show up and make a difference!
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="skills experience required qualifications">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#v2">
+                                    Do I need any specific skills or experience?
+                                </button>
+                            </h2>
+                            <div id="v2" class="accordion-collapse collapse" data-bs-parent="#accordionVolunteering">
+                                <div class="accordion-body">
+                                    Not at all! While some events may require specific skills (like teaching or medical knowledge), the majority of our events are open to everyone. Your willingness to help is the most important qualification. We also provide training for specialized tasks when needed.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="hours track certificate proof record">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#v3">
+                                    Can I track my volunteer hours and get a certificate?
+                                </button>
+                            </h2>
+                            <div id="v3" class="accordion-collapse collapse" data-bs-parent="#accordionVolunteering">
+                                <div class="accordion-body">
+                                    Yes! Your dashboard automatically tracks all the hours you contribute across events. You can download a verifiable volunteer certificate from your profile at any time, which can be used for college applications, job resumes, or personal records.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events -->
+                <div id="events" class="mb-5 faq-category reveal">
+                    <h4 class="fw-bold mb-4"><i class="bi bi-calendar-event me-2 text-primary"></i> Events</h4>
+                    <div class="accordion faq-accordion" id="accordionEvents">
+                        <div class="accordion-item faq-item" data-keywords="find event search discover browse upcoming">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#e1">
+                                    How do I find events near me?
+                                </button>
+                            </h2>
+                            <div id="e1" class="accordion-collapse collapse" data-bs-parent="#accordionEvents">
+                                <div class="accordion-body">
+                                    After logging in, go to the Events page where you can filter by location, category, date, and skill requirements. Our platform also recommends events based on your profile interests and past activities, making it easy to discover relevant opportunities.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="cancel withdraw leave event unregister">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#e2">
+                                    Can I cancel my registration for an event?
+                                </button>
+                            </h2>
+                            <div id="e2" class="accordion-collapse collapse" data-bs-parent="#accordionEvents">
+                                <div class="accordion-body">
+                                    Yes, you can withdraw from an event up to 24 hours before it starts without any penalty. Simply go to your profile, find the event under "My Events," and click "Withdraw." We do ask that you cancel as early as possible so the spot can be filled by another volunteer.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account -->
+                <div id="account" class="mb-5 faq-category reveal">
+                    <h4 class="fw-bold mb-4"><i class="bi bi-person-circle me-2 text-primary"></i> Account & Profile</h4>
+                    <div class="accordion faq-accordion" id="accordionAccount">
+                        <div class="accordion-item faq-item" data-keywords="reset password forgot change login credentials">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a1">
+                                    How do I reset my password?
+                                </button>
+                            </h2>
+                            <div id="a1" class="accordion-collapse collapse" data-bs-parent="#accordionAccount">
+                                <div class="accordion-body">
+                                    Click on "Forgot Password" on the login page. Enter your registered email address and you'll receive a secure reset link within a few minutes. The link is valid for 15 minutes. If you don't receive it, check your spam folder or contact support.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="delete remove deactivate close account">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2">
+                                    Can I delete my account?
+                                </button>
+                            </h2>
+                            <div id="a2" class="accordion-collapse collapse" data-bs-parent="#accordionAccount">
+                                <div class="accordion-body">
+                                    Yes. Navigate to Settings > Account > Delete Account. This action is permanent and will remove all your data including volunteer history. If you'd prefer to keep your records, you can deactivate your account instead, which hides your profile but retains your data.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NGO Partners -->
+                <div id="ngo-partners" class="mb-5 faq-category reveal">
+                    <h4 class="fw-bold mb-4"><i class="bi bi-building me-2 text-primary"></i> NGO Partners</h4>
+                    <div class="accordion faq-accordion" id="accordionNGO">
+                        <div class="accordion-item faq-item" data-keywords="register ngo organization partner join collaboration">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#n1">
+                                    How can our NGO register on the platform?
+                                </button>
+                            </h2>
+                            <div id="n1" class="accordion-collapse collapse" data-bs-parent="#accordionNGO">
+                                <div class="accordion-body">
+                                    We'd love to partner with you! Contact us through the <a href="/contact" class="fw-bold">Contact page</a> with your organization details. Our partnerships team will review your application and get back to you within 3-5 business days. Once approved, you'll get a dedicated admin dashboard to create and manage events.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="ngo features dashboard admin benefits manage">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#n2">
+                                    What features do NGOs get access to?
+                                </button>
+                            </h2>
+                            <div id="n2" class="accordion-collapse collapse" data-bs-parent="#accordionNGO">
+                                <div class="accordion-body">
+                                    Partner NGOs receive access to a full admin dashboard including: event creation & management, volunteer approval workflows, attendance tracking, impact analytics & reports, volunteer communication tools, and downloadable data exports. Premium partners also get dedicated support and priority listing.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical -->
+                <div id="technical" class="mb-5 faq-category reveal">
+                    <h4 class="fw-bold mb-4"><i class="bi bi-gear me-2 text-primary"></i> Technical</h4>
+                    <div class="accordion faq-accordion" id="accordionTech">
+                        <div class="accordion-item faq-item" data-keywords="data privacy secure safe security information personal">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#t1">
+                                    Is my personal data safe?
+                                </button>
+                            </h2>
+                            <div id="t1" class="accordion-collapse collapse" data-bs-parent="#accordionTech">
+                                <div class="accordion-body">
+                                    Absolutely. We use industry-standard security measures including encrypted passwords (bcrypt), JWT-based authentication, and HTTPS everywhere. Your personal data is never shared with third parties without your explicit consent. Read our <a href="#" class="fw-bold">Privacy Policy</a> for complete details.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item faq-item" data-keywords="mobile app phone android ios download">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#t2">
+                                    Is there a mobile app?
+                                </button>
+                            </h2>
+                            <div id="t2" class="accordion-collapse collapse" data-bs-parent="#accordionTech">
+                                <div class="accordion-body">
+                                    We are currently a web-first platform optimized for both desktop and mobile browsers. A dedicated Android and iOS app is on our roadmap for 2027. In the meantime, you can add our website to your phone's home screen for an app-like experience.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Still have questions -->
+                <div class="glass-panel p-5 text-center reveal">
+                    <i class="bi bi-question-diamond text-primary" style="font-size: 3rem;"></i>
+                    <h4 class="fw-bold mt-3 mb-2">Still have questions?</h4>
+                    <p class="text-muted mb-4">Can't find the answer you're looking for? Our support team is happy to help.</p>
+                    <a href="/contact" class="btn btn-primary rounded-pill px-5 shadow-sm">
+                        <i class="bi bi-envelope me-2"></i> Contact Support
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Scroll Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+    
+    // FAQ Live Search
+    const searchInput = document.getElementById('faqSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            const items = document.querySelectorAll('.faq-item');
+            const categories = document.querySelectorAll('.faq-category');
+            
+            if (!query) {
+                items.forEach(item => item.style.display = '');
+                categories.forEach(cat => cat.style.display = '');
+                return;
+            }
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const keywords = (item.dataset.keywords || '').toLowerCase();
+                const match = text.includes(query) || keywords.includes(query);
+                item.style.display = match ? '' : 'none';
+            });
+            
+            // Hide categories with zero visible items
+            categories.forEach(cat => {
+                const visibleItems = cat.querySelectorAll('.faq-item[style=""], .faq-item:not([style])');
+                const hasVisible = Array.from(cat.querySelectorAll('.faq-item')).some(i => i.style.display !== 'none');
+                cat.style.display = hasVisible ? '' : 'none';
+            });
+        });
+    }
+    
+    // Category nav active state
+    const catLinks = document.querySelectorAll('[data-category]');
+    catLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            catLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+{% endblock %}

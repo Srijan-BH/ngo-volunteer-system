@@ -1,0 +1,16 @@
+<!-- Footer Component -->
+<footer class="mt-auto py-3 px-4 border-top">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center text-muted small">
+        <div class="mb-2 mb-sm-0">
+            &copy; <span id="current-year"></span> NGO Volunteer Management System. All rights reserved.
+        </div>
+        <div class="d-flex gap-3">
+            <a href="/privacy" class="text-muted text-decoration-none hover-primary">Privacy Policy</a>
+            <a href="/terms" class="text-muted text-decoration-none hover-primary">Terms of Service</a>
+            <a href="/contact" class="text-muted text-decoration-none hover-primary">Contact Support</a>
+        </div>
+    </div>
+</footer>
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>

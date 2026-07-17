@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Appreciation</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- html2pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .btn-download {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background: #4338ca;
+        }
+
+        /* Certificate Container */
+        .certificate-wrapper {
+            background: white;
+            width: 1122px; /* A4 landscape width at 96 DPI */
+            height: 793px; /* A4 landscape height at 96 DPI */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 40px;
+        }
+
+        .certificate-border {
+            width: 100%;
+            height: 100%;
+            border: 8px solid #cbd5e1;
+            padding: 10px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .certificate-inner {
+            width: 100%;
+            height: 100%;
+            border: 2px solid #94a3b8;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+            position: relative;
+        }
+
+        /* Corner Ornaments */
+        .corner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 4px solid #4f46e5;
+            z-index: 10;
+        }
+        .corner-tl { top: 30px; left: 30px; border-right: none; border-bottom: none; }
+        .corner-tr { top: 30px; right: 30px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: 30px; left: 30px; border-right: none; border-top: none; }
+        .corner-br { bottom: 30px; right: 30px; border-left: none; border-top: none; }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            color: #1e293b;
+            margin: 10px 0 20px 0;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .presented-to {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .recipient-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 72px;
+            color: #0f172a;
+            margin: 20px 0;
+            line-height: 1;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 10px;
+            width: 80%;
+            display: inline-block;
+        }
+
+        .description {
+            font-size: 20px;
+            color: #475569;
+            line-height: 1.6;
+            margin: 20px auto;
+            max-width: 650px;
+        }
+
+        .event-name {
+            font-weight: 600;
+            color: #4f46e5;
+        }
+
+        .footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .signature-block {
+            text-align: center;
+            width: 250px;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid #94a3b8;
+            height: 40px;
+            margin-bottom: 10px;
+            font-family: 'Great Vibes', cursive;
+            font-size: 32px;
+            color: #0f172a;
+            line-height: 1;
+        }
+
+        .signature-title {
+            font-size: 14px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Ribbon Seal */
+        .seal {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 100px;
+            height: 100px;
+            background: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            border: 4px solid #cbd5e1;
+            z-index: 20;
+        }
+
+        .seal-inner {
+            text-align: center;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .seal-icon {
+            font-size: 30px;
+            margin-bottom: 2px;
+        }
+
+        /* Loading Overlay */
+        #loading {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            font-size: 24px;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="loading">Generating Certificate...</div>
+
+    <div class="controls">
+        <button class="btn-download" onclick="downloadPDF()"><i class="bi bi-download"></i> Download PDF</button>
+    </div>
+
+    <div class="certificate-wrapper" id="certificate">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+        
+        <div class="certificate-border">
+            <div class="certificate-inner">
+                
+                <div class="logo">
+                    <i class="bi bi-heart-pulse-fill"></i> NGO Vol.
+                </div>
+
+                <div class="title">Certificate of Appreciation</div>
+                
+                <div class="subtitle">This acknowledges the outstanding contribution of</div>
+
+                <div class="presented-to">Presented to</div>
+
+                <div class="recipient-name" id="cert-name">Loading Name...</div>
+
+                <div class="description">
+                    For successfully participating and dedicating <strong id="cert-hours">0</strong> hours of volunteer service 
+                    to the community during the <span class="event-name" id="cert-event">Loading Event...</span>. 
+                    Your commitment and passion make a world of difference.
+                </div>
+
+                <div class="footer">
+                    <div class="signature-block">
+                        <div class="signature-line" id="cert-date">--</div>
+                        <div class="signature-title">Date of Issue</div>
+                    </div>
+                    
+                    <div class="signature-block">
+                        <div class="signature-line"></div>
+                        <div class="signature-title">Authorized Signature</div>
+                    </div>
+                </div>
+
+                <div class="seal">
+                    <div class="seal-inner">
+                        <div class="seal-icon"><i class="bi bi-award-fill"></i></div>
+                        <div>OFFICIAL</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const requestId = "{{ request_id }}";
+
+        async function fetchCertificateData() {
+            try {
+                const token = localStorage.getItem('access_token');
+                if (!token) {
+                    alert("You must be logged in to view this certificate.");
+                    window.close();
+                    return;
+                }
+
+                const res = await fetch(`/api/requests/${requestId}/certificate`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const json = await res.json();
+                
+                if (res.ok && json.status === 'success') {
+                    document.getElementById('cert-name').innerText = json.data.volunteer_name;
+                    document.getElementById('cert-event').innerText = json.data.event_title;
+                    document.getElementById('cert-hours').innerText = json.data.hours;
+                    document.getElementById('cert-date').innerText = json.data.date;
+                    
+                    document.getElementById('loading').style.display = 'none';
+                    
+                    // Auto-trigger download
+                    setTimeout(downloadPDF, 1000);
+                } else {
+                    document.getElementById('loading').innerHTML = `<span style="color:red">Error: ${json.message || 'Failed to load certificate.'}</span>`;
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('loading').innerHTML = `<span style="color:red">Error loading certificate data.</span>`;
+            }
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('certificate');
+            const opt = {
+                margin:       0,
+                filename:     `Certificate_${document.getElementById('cert-name').innerText.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'px', format: [1122, 793], orientation: 'landscape' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        window.onload = fetchCertificateData;
+    </script>
+</body>
+</html>

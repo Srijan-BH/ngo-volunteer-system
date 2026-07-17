@@ -1,0 +1,376 @@
+/*
+ * Auth Pages — Login, Signup, Forgot Password
+ * Premium split-screen layout with glassmorphism form panels
+ */
+
+/* ========================================================================
+   Auth Layout — Split Screen
+   ======================================================================== */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+}
+
+/* Left panel — Branding / Illustration */
+.auth-brand-panel {
+    flex: 0 0 45%;
+    max-width: 45%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 60%, var(--secondary) 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    color: white;
+    overflow: hidden;
+}
+.auth-brand-panel::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 60%;
+    height: 60%;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+}
+.auth-brand-panel::after {
+    content: '';
+    position: absolute;
+    bottom: -15%;
+    right: -15%;
+    width: 50%;
+    height: 50%;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+}
+.auth-brand-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 400px;
+}
+.auth-brand-content .brand-logo {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+}
+.auth-brand-content h2 {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.auth-brand-content p {
+    opacity: 0.85;
+    line-height: 1.7;
+}
+
+/* Floating decorative shapes */
+.auth-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.07;
+    background: white;
+    z-index: 0;
+}
+.auth-shape-1 { width: 200px; height: 200px; top: 10%; left: 60%; animation: float 8s ease-in-out infinite; }
+.auth-shape-2 { width: 120px; height: 120px; bottom: 20%; left: 10%; animation: float 10s ease-in-out infinite reverse; }
+.auth-shape-3 { width: 80px; height: 80px; top: 60%; right: 5%; animation: float 6s ease-in-out infinite; }
+
+@keyframes float {
+    0%   { transform: translateY(0) scale(1); }
+    50%  { transform: translateY(-15px) scale(1.05); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Right panel — Form */
+.auth-form-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    background: var(--bg-primary);
+    overflow-y: auto;
+}
+
+.auth-form-container {
+    width: 100%;
+    max-width: 460px;
+}
+
+.auth-form-header {
+    margin-bottom: 2rem;
+}
+.auth-form-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.auth-form-header p {
+    color: var(--text-muted);
+}
+
+/* ========================================================================
+   Form Field Enhancements
+   ======================================================================== */
+.auth-input-group {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.auth-input-group .form-floating {
+    position: relative;
+}
+
+/* Password visibility toggle */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    z-index: 5;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+.password-toggle:hover {
+    color: var(--primary);
+}
+
+/* Validation states */
+.form-control.is-valid {
+    border-color: var(--success);
+    background-image: none;
+}
+.form-control.is-valid:focus {
+    box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.25);
+}
+.form-control.is-invalid {
+    border-color: var(--danger);
+    background-image: none;
+}
+.form-control.is-invalid:focus {
+    box-shadow: 0 0 0 0.25rem rgba(239, 68, 68, 0.25);
+}
+
+.field-error {
+    font-size: 0.8rem;
+    color: var(--danger);
+    margin-top: 0.3rem;
+    display: none;
+}
+.field-error.visible {
+    display: block;
+    animation: fadeInUp 0.25s ease;
+}
+
+/* ========================================================================
+   Password Strength Meter
+   ======================================================================== */
+.password-strength {
+    margin-top: 0.5rem;
+}
+.strength-bars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0.35rem;
+}
+.strength-bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--bg-tertiary);
+    transition: background-color 0.3s;
+}
+.strength-bar.active.weak       { background: var(--danger); }
+.strength-bar.active.fair       { background: var(--warning); }
+.strength-bar.active.good       { background: var(--info); }
+.strength-bar.active.strong     { background: var(--success); }
+.strength-bar.active.very-strong{ background: var(--success); }
+
+.strength-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+.strength-label.weak        { color: var(--danger); }
+.strength-label.fair        { color: var(--warning); }
+.strength-label.good        { color: var(--info); }
+.strength-label.strong      { color: var(--success); }
+.strength-label.very-strong { color: var(--success); }
+
+/* Password requirements checklist */
+.password-requirements {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+.password-requirements li {
+    margin-bottom: 0.25rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.password-requirements li i {
+    font-size: 0.75rem;
+}
+.password-requirements li.met {
+    color: var(--success);
+}
+.password-requirements li.met i::before {
+    content: '\f26b'; /* bi-check-circle-fill */
+}
+.password-requirements li.unmet i::before {
+    content: '\f622'; /* bi-x-circle */
+}
+.password-requirements li.unmet {
+    color: var(--text-muted);
+}
+
+/* ========================================================================
+   Auth Extras — Social, Divider, Links
+   ======================================================================== */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    margin: 1.75rem 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+.auth-divider span {
+    padding: 0 1rem;
+}
+
+.social-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+.social-login-btn:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+}
+.social-login-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+.auth-links a {
+    font-weight: 600;
+}
+
+/* Submit button loading */
+.auth-submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+.auth-submit-btn .btn-text,
+.auth-submit-btn .btn-loading {
+    transition: opacity 0.2s;
+}
+.auth-submit-btn .btn-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+.auth-submit-btn.loading .btn-text {
+    opacity: 0;
+}
+.auth-submit-btn.loading .btn-loading {
+    opacity: 1;
+}
+
+/* ========================================================================
+   Success / Reset States
+   ======================================================================== */
+.auth-success-state {
+    text-align: center;
+    padding: 2rem 0;
+    display: none;
+}
+.auth-success-state.visible {
+    display: block;
+    animation: fadeInUp 0.5s ease;
+}
+.auth-success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================================
+   Responsive — Stack on mobile
+   ======================================================================== */
+@media (max-width: 991.98px) {
+    .auth-wrapper {
+        flex-direction: column;
+    }
+    .auth-brand-panel {
+        flex: none;
+        max-width: 100%;
+        width: 100%;
+        padding: 2.5rem 2rem;
+        min-height: auto;
+    }
+    .auth-form-panel {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .auth-brand-panel {
+        padding: 2rem 1.5rem;
+    }
+    .auth-form-container {
+        max-width: 100%;
+    }
+    .auth-form-header h1 {
+        font-size: 1.5rem;
+    }
+}

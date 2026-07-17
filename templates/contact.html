@@ -1,0 +1,227 @@
+{% extends "public_base.html" %}
+
+{% block title %}Contact Us — NGO Volunteer Management System{% endblock %}
+
+{% block content %}
+
+<!-- Page Hero -->
+<section class="page-hero text-center">
+    <div class="hero-bg-shapes">
+        <div class="shape-blob shape-1"></div>
+        <div class="shape-blob shape-2"></div>
+    </div>
+    <div class="container">
+        <span class="badge bg-primary bg-opacity-10 text-primary mb-3 py-2 px-3 rounded-pill fw-semibold">
+            <i class="bi bi-envelope me-1"></i> Get In Touch
+        </span>
+        <h1 class="display-5 fw-bold mb-3">Contact Us</h1>
+        <p class="lead text-secondary mx-auto" style="max-width: 600px;">
+            Have a question, partnership idea, or just want to say hello? We'd love to hear from you.
+        </p>
+    </div>
+</section>
+
+<!-- Contact Form + Info -->
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Form -->
+            <div class="col-lg-7 reveal">
+                <div class="card border-0 shadow-sm rounded-4 p-lg-4 p-3">
+                    <div class="card-body">
+                        <h3 class="fw-bold mb-1">Send us a message</h3>
+                        <p class="text-muted mb-4">Fill out the form below and we'll get back to you within 24 hours.</p>
+                        
+                        <form id="contactForm">
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="contactName" name="name" placeholder="Your Name" required>
+                                        <label for="contactName">Full Name <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="contactEmail" name="email" placeholder="Your Email" required>
+                                        <label for="contactEmail">Email Address <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="contactPhone" name="phone" placeholder="Phone">
+                                        <label for="contactPhone">Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="contactSubject" name="subject" required>
+                                            <option value="" disabled selected>Choose a topic</option>
+                                            <option value="general">General Inquiry</option>
+                                            <option value="volunteer">Volunteer Registration</option>
+                                            <option value="partnership">NGO Partnership</option>
+                                            <option value="support">Technical Support</option>
+                                            <option value="feedback">Feedback & Suggestions</option>
+                                        </select>
+                                        <label for="contactSubject">Subject <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-floating mb-4">
+                                <textarea class="form-control" id="contactMessage" name="message" placeholder="Your message" style="height: 140px" required></textarea>
+                                <label for="contactMessage">Your Message <span class="text-danger">*</span></label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 w-100 shadow-sm" id="contactSubmitBtn">
+                                <i class="bi bi-send me-2"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Info Card -->
+            <div class="col-lg-5 reveal">
+                <div class="contact-info-card h-100">
+                    <h4 class="fw-bold mb-2">Contact Information</h4>
+                    <p class="opacity-75 mb-5 small">Reach out to us directly through any of these channels.</p>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Our Office</h6>
+                            <p class="opacity-75 mb-0 small">enteroffice in madapura,<br>madikeri</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Email Us</h6>
+                            <p class="opacity-75 mb-0 small">ngo.admin.alerts@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Call Us</h6>
+                            <p class="opacity-75 mb-0 small">+91 9845408320</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-icon"><i class="bi bi-clock-fill"></i></div>
+                        <div>
+                            <h6 class="fw-bold mb-1">Working Hours</h6>
+                            <p class="opacity-75 mb-0 small">Mon – Fri: 9:00 AM – 6:00 PM<br>Sat: 10:00 AM – 2:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <hr class="opacity-25 my-4">
+                    <div class="d-flex gap-3">
+                        <a href="https://www.facebook.com/bhsrijan.naik" target="_blank" class="contact-icon text-white text-decoration-none"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/BhSrijan" target="_blank" class="contact-icon text-white text-decoration-none"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://www.instagram.com/srijan_naik?igsh=Z3oxMjh6dGpyMmlq" target="_blank" class="contact-icon text-white text-decoration-none"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/bh-srijan-naik?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="contact-icon text-white text-decoration-none"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- CTA -->
+<section class="cta-section text-center">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Prefer to volunteer instead?</h2>
+        <p class="lead mb-5 opacity-75 mx-auto" style="max-width: 600px;">Skip the formalities. Sign up now and start making a difference in your community right away.</p>
+        <a href="/register" class="btn btn-light btn-lg rounded-pill px-5 shadow-sm me-3">Register Now</a>
+        <a href="/faq" class="btn btn-outline-light btn-lg rounded-pill px-5">Read FAQ</a>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Scroll Reveal
+document.addEventListener('DOMContentLoaded', function () {
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+});
+
+// Contact Form Submission
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contactSubmitBtn');
+    
+    // Show loading state
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span> Sending...';
+    
+    // Gather data
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    
+    try {
+        const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            btn.innerHTML = '<i class="bi bi-check-circle me-2"></i> Message Sent!';
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-success');
+            
+            if (window.showToast) {
+                showToast("Message Sent!", "Thank you for reaching out. We'll get back to you shortly.", "success");
+            }
+            this.reset();
+        } else {
+            btn.innerHTML = '<i class="bi bi-exclamation-circle me-2"></i> Error';
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-danger');
+            
+            if (window.showToast) {
+                showToast('Error', result.message || 'Failed to send message.', 'danger');
+            }
+        }
+    } catch (error) {
+        btn.innerHTML = '<i class="bi bi-exclamation-circle me-2"></i> Error';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-danger');
+        
+        if (window.showToast) {
+            showToast('Error', 'Network error. Please try again later.', 'danger');
+        }
+    }
+    
+    // Reset button after 3 seconds
+    setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-send me-2"></i> Send Message';
+        btn.classList.remove('btn-success', 'btn-danger');
+        btn.classList.add('btn-primary');
+    }, 3000);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Manage Volunteers — NGO Admin{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_volunteers.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Volunteers Directory</h2>
+        <p class="text-muted mb-0">Manage registered volunteers and view their profiles.</p>
+    </div>
+    <div>
+        <button class="btn btn-outline-secondary rounded-pill fw-semibold shadow-sm me-2" id="exportBtn">
+            <i class="bi bi-download me-1"></i> Export Data
+        </button>
+    </div>
+</div>
+
+<!-- Action Bar -->
+<div class="admin-action-bar animate-fade-in-up stagger-1">
+    <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" class="form-control" id="volunteerSearch" placeholder="Search by name, email, or skill...">
+    </div>
+    
+    <div class="filter-group">
+        <select class="form-select form-select-sm" id="statusFilter">
+            <option value="">All Statuses</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+        </select>
+        
+        <select class="form-select form-select-sm" id="availabilityFilter">
+            <option value="">All Availability</option>
+            <option value="weekends">Weekends Only</option>
+            <option value="weekdays">Weekdays</option>
+            <option value="any">Any Time</option>
+        </select>
+    </div>
+</div>
+
+<!-- Volunteers Table -->
+<div class="table-panel animate-fade-in-up stagger-2">
+    <div class="table-responsive">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Volunteer</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Availability</th>
+                    <th>Top Skills</th>
+                    <th>Hours</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="volunteersTbody">
+                <!-- JS Populated -->
+                <tr>
+                    <td colspan="7" class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4" aria-label="Volunteers pagination">
+    <ul class="pagination justify-content-center" id="volunteersPagination">
+        <!-- JS Pagination -->
+    </ul>
+</nav>
+
+<!-- View Profile Modal -->
+<div class="modal fade" id="profileModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0 pb-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center pt-0" id="profileModalBody">
+                <!-- JS populated -->
+            </div>
+            <div class="modal-footer border-top-0 pt-0 justify-content-center">
+                <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                <a href="#" class="btn btn-primary rounded-pill px-4" id="contactVolunteerBtn"><i class="bi bi-envelope"></i> Contact</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_volunteers.js') }}"></script>
+{% endblock %}

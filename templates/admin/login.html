@@ -1,0 +1,205 @@
+{% extends "auth_base.html" %}
+
+{% block title %}Admin Portal — NGO Volunteer System{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    /* Animated background elements */
+    .bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, rgba(249, 115, 22, 0) 70%);
+        z-index: 0;
+    }
+    .bg-circle-1 {
+        width: 600px;
+        height: 600px;
+        top: -200px;
+        left: -100px;
+    }
+    .bg-circle-2 {
+        width: 500px;
+        height: 500px;
+        bottom: -150px;
+        right: -100px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(79, 70, 229, 0) 70%);
+    }
+
+    .admin-login-wrapper {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 440px;
+        padding: 2rem;
+    }
+
+    .admin-login-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .admin-badge {
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(249, 115, 22, 0.2));
+        color: #fca5a5;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1.5rem;
+    }
+
+    .login-title {
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .login-subtitle {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+
+    .form-floating > label {
+        color: #94a3b8;
+    }
+
+    .form-floating > .form-control {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        border-radius: 12px;
+    }
+    
+    .form-floating > .form-control:focus {
+        background: rgba(15, 23, 42, 0.8);
+        border-color: #f97316;
+        box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+        color: #ffffff;
+    }
+
+    /* Fix autofill background in webkit */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active{
+        -webkit-box-shadow: 0 0 0 30px #0f172a inset !important;
+        -webkit-text-fill-color: white !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .btn-admin {
+        background: linear-gradient(135deg, #ef4444, #f97316);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 0.85rem 1.5rem;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .btn-admin:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+        color: white;
+    }
+
+    .form-check-label {
+        color: #94a3b8;
+    }
+    
+    .form-check-input {
+        background-color: rgba(15, 23, 42, 0.6);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    .form-check-input:checked {
+        background-color: #ef4444;
+        border-color: #ef4444;
+    }
+
+    .return-link {
+        color: #94a3b8;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+
+    .return-link:hover {
+        color: #ffffff;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="bg-circle bg-circle-1"></div>
+<div class="bg-circle bg-circle-2"></div>
+
+<div class="admin-login-wrapper">
+    <div class="admin-login-card animate-fade-in-up">
+        <div class="text-center">
+            <span class="admin-badge"><i class="bi bi-shield-lock-fill me-1"></i> Admin Portal</span>
+            <h3 class="login-title">Secure Login</h3>
+            <p class="login-subtitle">Authenticate to access the dashboard</p>
+        </div>
+        
+        <div id="adminLoginAlert" class="alert alert-danger d-none small py-2 border-0 bg-danger bg-opacity-25 text-white" role="alert"></div>
+        
+        <form id="adminLoginForm">
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                <label for="email"><i class="bi bi-envelope me-2"></i>Email address</label>
+            </div>
+            
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                <label for="password"><i class="bi bi-lock me-2"></i>Password</label>
+            </div>
+            
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="rememberMe" name="remember_me">
+                <label class="form-check-label small" for="rememberMe">
+                    Keep me signed in
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-admin w-100" id="loginBtn">
+                Authenticate <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+        </form>
+        
+        <div class="text-center">
+            <a href="/" class="return-link"><i class="bi bi-arrow-left me-2"></i> Return to public site</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_auth.js') }}"></script>
+{% endblock %}

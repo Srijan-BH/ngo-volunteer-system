@@ -1,0 +1,48 @@
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ─── Virtual Environment ─────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+ENV/
+
+# ─── Environment Variables ───────────────────────────────────────────────────
+.env
+.env.production
+!.env.example
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ─── Uploads ─────────────────────────────────────────────────────────────────
+uploads/profiles/*
+uploads/events/*
+!uploads/profiles/.gitkeep
+!uploads/events/.gitkeep
+
+# ─── IDE ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ─── Testing ─────────────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ─── Static (CDN used in prod) ───────────────────────────────────────────────
+static/images/*
+!static/images/.gitkeep

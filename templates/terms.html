@@ -1,0 +1,32 @@
+{% extends "public_base.html" %}
+
+{% block title %}Terms of Service — NGO Volunteer System{% endblock %}
+
+{% block content %}
+<div class="container py-5 my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="mb-4">Terms of Service</h1>
+            <p class="text-muted mb-5">Last updated: {{ current_year }}</p>
+            
+            <div class="content-section">
+                <h3>1. Acceptance of Terms</h3>
+                <p>By accessing or using the NGO Volunteer Management System, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, then you do not have permission to access the Service.</p>
+                
+                <h3 class="mt-4">2. Volunteer Responsibilities</h3>
+                <p>As a volunteer, you agree to provide accurate and complete information during registration. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+                
+                <h3 class="mt-4">3. Event Participation</h3>
+                <p>When signing up for events, you commit to attending and participating to the best of your ability. If you are unable to attend, you must cancel your registration as early as possible to allow others to participate.</p>
+                
+                <h3 class="mt-4">4. Code of Conduct</h3>
+                <p>Users must treat all organization members, other volunteers, and community members with respect. Harassment, discrimination, or abusive behavior of any kind will result in immediate termination of your account.</p>
+            </div>
+            
+            <div class="mt-5 pt-4 border-top">
+                <a href="javascript:history.back()" class="btn btn-outline-primary rounded-pill"><i class="bi bi-arrow-left me-2"></i>Go Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

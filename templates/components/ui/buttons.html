@@ -1,0 +1,40 @@
+{% macro primary(text, type='button', class='', id='', icon=None) %}
+<button type="{{ type }}" class="btn btn-primary {{ class }}" {% if id %}id="{{ id }}"{% endif %}>
+    {% if icon %}<i class="bi {{ icon }}"></i>{% endif %}
+    {{ text }}
+</button>
+{% endmacro %}
+
+{% macro outline_primary(text, type='button', class='', id='', icon=None) %}
+<button type="{{ type }}" class="btn btn-outline-primary {{ class }}" {% if id %}id="{{ id }}"{% endif %}>
+    {% if icon %}<i class="bi {{ icon }}"></i>{% endif %}
+    {{ text }}
+</button>
+{% endmacro %}
+
+{% macro danger(text, type='button', class='', id='', icon=None) %}
+<button type="{{ type }}" class="btn btn-danger {{ class }}" {% if id %}id="{{ id }}"{% endif %}>
+    {% if icon %}<i class="bi {{ icon }}"></i>{% endif %}
+    {{ text }}
+</button>
+{% endmacro %}
+
+{% macro icon_btn(icon, type='button', class='', id='', tooltip='') %}
+<button type="{{ type }}" class="btn btn-sm btn-light border {{ class }}" {% if id %}id="{{ id }}"{% endif %} {% if tooltip %}data-bs-toggle="tooltip" title="{{ tooltip }}"{% endif %}>
+    <i class="bi {{ icon }}"></i>
+</button>
+{% endmacro %}
+
+{% macro link(text, href='#', class='', icon=None) %}
+<a href="{{ href }}" class="btn btn-primary {{ class }}">
+    {% if icon %}<i class="bi {{ icon }}"></i>{% endif %}
+    {{ text }}
+</a>
+{% endmacro %}
+
+{% macro loading_primary(text, id, class='') %}
+<button type="button" class="btn btn-primary {{ class }}" id="{{ id }}" disabled style="display: none;">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    {{ text }}
+</button>
+{% endmacro %}

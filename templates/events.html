@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Events — NGO Volunteer System{% endblock %}
+
+{% block styles %}
+<!-- Leaflet CSS for Maps -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/events.css') }}">
+<style>
+    #mapContainer { height: 600px; width: 100%; border-radius: 12px; display: none; }
+</style>
+{% endblock %}
+
+{% block page_title %}Browse Events{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-2">
+    
+    <!-- Page Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Upcoming Events</h2>
+            <p class="text-muted mb-0">Discover and join opportunities to make an impact in your community.</p>
+        </div>
+        <div class="mt-3 mt-md-0 d-flex gap-2">
+            <div class="btn-group" role="group">
+                <button type="button" id="btnListView" class="btn btn-outline-primary btn-sm fw-semibold active">
+                    <i class="bi bi-grid me-1"></i> List
+                </button>
+                <button type="button" id="btnMapView" class="btn btn-outline-primary btn-sm fw-semibold">
+                    <i class="bi bi-map me-1"></i> Map
+                </button>
+            </div>
+            <button id="btnNearMe" class="btn btn-primary rounded-pill btn-sm fw-semibold shadow-sm">
+                <i class="bi bi-geo-alt me-1"></i> Find Near Me
+            </button>
+        </div>
+    </div>
+
+    <!-- Filters & Search Bar -->
+    <div class="events-filter-bar">
+        <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input type="text" id="searchEvents" class="form-control" placeholder="Search by name or location...">
+        </div>
+        
+        <div class="filter-actions">
+            <div class="input-group">
+                <span class="input-group-text bg-transparent border-end-0 rounded-start-pill text-muted">
+                    <i class="bi bi-tag"></i>
+                </span>
+                <select id="categoryFilter" class="form-select border-start-0 rounded-end-pill shadow-none" aria-label="Category Filter">
+                    <option value="All" selected>All Categories</option>
+                    <option value="Environment">Environment</option>
+                    <option value="Education">Education</option>
+                    <option value="Health">Health</option>
+                    <option value="Social Welfare">Social Welfare</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <span class="input-group-text bg-transparent border-end-0 rounded-start-pill text-muted">
+                    <i class="bi bi-sort-down"></i>
+                </span>
+                <select id="sortFilter" class="form-select border-start-0 rounded-end-pill shadow-none" aria-label="Sort By">
+                    <option value="upcoming" selected>Closest Upcoming</option>
+                    <option value="slots_avail">Most Slots Available</option>
+                </select>
+            </div>
+            
+            <div class="input-group d-none" id="distanceFilterContainer">
+                <span class="input-group-text bg-transparent border-end-0 rounded-start-pill text-muted">
+                    <i class="bi bi-compass"></i>
+                </span>
+                <select id="distanceFilter" class="form-select border-start-0 rounded-end-pill shadow-none" aria-label="Distance">
+                    <option value="5">Within 5 Miles</option>
+                    <option value="15" selected>Within 15 Miles</option>
+                    <option value="50">Within 50 Miles</option>
+                    <option value="100">Within 100 Miles</option>
+                    <option value="200">Within 200 Miles</option>
+                    <option value="500">Within 500 Miles</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events Grid Container -->
+    <div id="eventsGrid" class="events-grid mb-5">
+        <!-- JS will populate cards here -->
+    </div>
+
+    <!-- Map Container -->
+    <div id="mapContainer" class="mb-5 shadow-sm"></div>
+
+    <!-- Pagination Container -->
+    <nav aria-label="Events pagination">
+        <div id="pagination" class="d-flex justify-content-center">
+            <!-- JS will populate pagination here -->
+        </div>
+    </nav>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="{{ url_for('static', filename='js/events.js') }}"></script>
+{% endblock %}

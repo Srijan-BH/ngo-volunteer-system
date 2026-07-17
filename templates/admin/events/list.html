@@ -1,0 +1,71 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Manage Events — NGO Admin{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_events.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">Event Management</h2>
+        <p class="text-muted mb-0">Create, update, and monitor all NGO events.</p>
+    </div>
+    <a href="{{ url_for('admin_event_create') }}" class="btn btn-primary rounded-pill fw-semibold shadow-sm">
+        <i class="bi bi-plus-lg me-1"></i> Add New Event
+    </a>
+</div>
+
+<!-- Action Bar -->
+<div class="admin-action-bar animate-fade-in-up stagger-1">
+    <div class="search-box">
+        <i class="bi bi-search"></i>
+        <input type="text" class="form-control" id="eventSearch" placeholder="Search events...">
+    </div>
+    
+    <div class="filter-group">
+        <select class="form-select form-select-sm" id="statusFilter">
+            <option value="">All Statuses</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+        </select>
+        
+        <select class="form-select form-select-sm" id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="environment">Environment</option>
+            <option value="education">Education</option>
+            <option value="health">Health</option>
+            <option value="community">Community</option>
+        </select>
+        
+        <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" id="manageCategoriesBtn">
+            <i class="bi bi-tags me-1"></i> Manage Categories
+        </button>
+    </div>
+</div>
+
+<!-- Event List -->
+<div class="row g-3" id="adminEventList">
+    <!-- JS will populate this -->
+    <div class="col-12 text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<!-- Pagination -->
+<nav class="mt-4" aria-label="Events pagination">
+    <ul class="pagination justify-content-center" id="eventsPagination">
+        <!-- JS Pagination -->
+    </ul>
+</nav>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_events_list.js') }}"></script>
+{% endblock %}
