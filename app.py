@@ -3,6 +3,9 @@ NGO Volunteer Management System
 Main Application Entry Point
 """
 
+import eventlet
+eventlet.monkey_patch()
+
 import logging
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
